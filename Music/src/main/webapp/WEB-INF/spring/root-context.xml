@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"   
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+   http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   >
+	<!-- bean : 객체를 생성하는 태그 -->
+	<!-- 히카리CP 환경설정, mysql 5버전 이상부터는 설정 추가 -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- com.zaxxer.hikari.HikariConfig.class -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+	    <property name="jdbcUrl" value="jdbc:mysql://project-db-campus.smhrd.com:3312/sc_21K_bigdata11_p3_2?user=root" />
+	    <property name="username" value="sc_21K_bigdata11_p3_2" />
+	    <property name="password" value="smhrd2" />
+	    
+	</bean>	
+	<!-- hikariConfig 생성되면 써먹을 수 있도록 HikariDataSource 객체 생성 
+										(커넥션 풀을 생성)
+		com.zaxxer.hikari.HikariDataSource.class 
+		-->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+	    destroy-method="close">
+	    <constructor-arg ref="hikariConfig"/>
+	</bean>
+	<!-- Mybatis가 커넥션 풀과 연결, SQL문 실행할 수 있도록 SqlsessionFactoryBean 
+	org.mybatis.spring.SqlSessionFactoryBean.class-->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 만들어놓은 커넥션풀과 mybatis 사용 할 수 있도록 
+	Mapper 인터페이스를 메모리에 올리는 과정(scan) -->
+	
+	<mybatis-spring:scan base-package="com.smhrd.Mapper"/>
+</beans>

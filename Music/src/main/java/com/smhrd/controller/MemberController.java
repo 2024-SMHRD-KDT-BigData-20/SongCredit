@@ -19,27 +19,64 @@ public class MemberController {
 	private MemberMapper mmaper;
 	
 	
+	// 로그인
 	@PostMapping("/Login.do")
 	public String memberLogin(Member mvo, HttpSession session) {
-		Member loginMember = mmaper.memberLogin(mvo);
-		
-		// 스프링에서 session객체 이용방법
-		// 1) HttpSession session = request.getSession();
-		//    -> 메소드의 매개변수에 HttpServletRequest request를 받아와서
-		// 		 객체를 만든 다음에 session사용
-		// 2) 메소드의 매개변수에 HttpSession session 받아옴
-		session.setAttribute("loginMember", loginMember);
-		
-		// 로그인 성공하고 나면 다시 basic.jsp로 이동
-		// 이미 만든 메소드로 다시 이동 
-		return "redirect:/boardList.do";
+	    Member loginMember = mmaper.memberLogin(mvo);
+	    
+	    if (loginMember != null) {
+	        session.setAttribute("loginMember", loginMember);
+	        return "redirect:/mainList.do";
+	    } else {
+	        // 로그인 실패 시 처리
+	    	System.out.println("로그인실패");
+	        return "redirect:/mainList.do";
+	    }
 	}
 	
+	// 회원가입
+	@PostMapping("/Join.do")
+	public String memberJoin( Member member) {
+	    int result = mmaper.memberJoin(member);
+	    if (result > 0) {
+	        return "redirect:/mainList.do";
+	    } else {
+	        return "redirect:/mainList.do";
+	    }
+	}
+	
+	// 아이디 찾기
+	@PostMapping("/FindId.do")
+	public String memberFindId(Member mvo, HttpSession session) {
+		Member FindIdMember = mmaper.memberFindId(mvo);
+		if(FindIdMember != null) {
+			session.setAttribute("FindIdMember", FindIdMember);
+		}
+		else {
+			System.out.println("아이디찾기 실패");
+		}
+		return "redirect:/mainList.do";
+	}
+	
+	// 비밀번호 찾기
+	@PostMapping("/FindPw.do")
+	public String memberFindPw(Member mvo,HttpSession session) {
+		Member FindPwMember = mmaper.memberFindPw(mvo);
+		if(FindPwMember != null) {
+			session.setAttribute("FindIdMember", FindPwMember);
+		}
+		else {
+			System.out.println("비밀번호찾기 실패");
+		}
+		return "redirect:/mainList.do";
+	}
+	
+	// 로그아웃
 	@RequestMapping("/Logout.do")
 	public String memberLogout(HttpSession session) {
 		session.removeAttribute("loginMember");
 		
-		return "redirect:/boardList.do";
+		return "redirect:/mainList.do";
 	}
 	
 	

@@ -22,7 +22,7 @@ import com.smhrd.entity.Board;
 // 기능을 알려주는 표시 : 주석 - 전처리를 하기 위한 기호
 // 초창기 자료 @Component
 @Controller
-public class BoardController {
+public class MainController {
 	// 생성자 주입
 	// MemberDAO dao = new MemberDAO();
 	@Autowired
@@ -30,11 +30,11 @@ public class BoardController {
 	
 	// 어떤 요청을 처리할지 연결(mapping)할지 맵핑기호
 	// @RequestMapping("/요청내용")
-	@RequestMapping("/userList.do")
+	@RequestMapping("/mainList.do")
 	public String boardList() {
 		// view page name 결과로 돌려준다.
 		// WEB-INF / views _____.jsp (ViewResolver에 의해)
-		return "chart";
+		return "main";
 	}
 	// ajax에서 get방식으로 요청이 넘어옴
 	// ajax결과는 다른 jsp로 이동이 아니라 데이터만 넘겨줌

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- 페이지내에서 jstl을 사용해서 변수로 프로젝트 ContextPath 저장 --%>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
@@ -10,66 +10,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>음악추천정보시스템</title>
-<link rel="stylesheet" href="${cpath }/resources/css/style.css">
+<link rel="stylesheet" href="${cpath}/resources/css/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-	<script>
-		$(document).ready(function() {
-			// 게시글 목록 가져오는 함수 실행
-			boardList();
-
-		});
-		function boardList() {
-			$.ajax({
-				url : "${cpath}/main",
-				type : "get",
-				// 불러오기
-				dataType : "json",
-				success : callBack,//ajax에서 함수를 부르는 경우 () 적지 않음
-				error : function() {
-					alert("메인문가져오기 실패");
-				}
-
-			});
-	        function createItem(imageSrc, title, artist, sales, price) {
-	            return `
-	                <div class="cList">
-	                    <img src="${imageSrc}" alt="${title}">
-	                    <h4>${title}</h4>
-	                    <h5>${artist}</h5>
-	                    <p>판매량: ${sales}</p>
-	                    <p>현재가: ${price}</p>
-	                </div>
-	            `;
-	        }
-
-	        function callback(data) {
-	            const container = document.getElementById('gridContainer');
-	            let itemsHTML = '';
-
-	            data.forEach(item => {
-	                itemsHTML += createItem(item.imageSrc, item.title, item.artist, item.sales, item.price);
-	            });
-
-	            container.innerHTML = itemsHTML;
-	        }
-
-	        // 예시 데이터
-	        const data = [];
-	        for (let i = 1; i <= 6; i++) {
-	            data.push({
-	                imageSrc: `img/img${i}.jpg`,
-	                title: `제목${i}`,
-	                artist: `가수${i}`,
-	                sales: `판매량 + 0.3%`,
-	                price: `10,000`
-	            });
-	        }
-
-		}
-	</script>
-	ㅉ
 	<div class="header">
 		<a href="" class="hamburger-button"> <span></span> <span></span> <span></span>
 			<span></span>
@@ -117,12 +62,11 @@
 	</div>
 	<div class="main">
 		<!-- 메인 컨테이너 -->
-		<div class="maincontainer">
-			<div>
-				<i>Top 추천곡 리스트</i>
-			</div>
-			<div class=""></div>
-		</div>
+        <div class="maincontainer">
+            <i>Top 추천곡 리스트</i>
+            <div class="slider" id="gridContainer">
+            </div>
+        </div>
 		<!-- 로그인 컨테이너 -->
 		<div class="signcontainer" style="display: none">
 			<div class="text-box">
@@ -301,6 +245,42 @@
 			</form>
 		</div>
 	</div>
+	<script>
+	$(document).ready(function() {
+	    // 게시글 목록 가져오는 함수 실행
+	    chartList();
+	});
+
+	function chartList() {
+	    $.ajax({
+	        url: "${cpath}/chart", // 서버 URL에 ${cpath} 사용
+	        type: "get",
+	        dataType: "json",
+	        success: callback,
+	        error: function() {
+	            alert("데이터를 가져오는데 실패했습니다.");
+	        }
+	    });
+	}
+
+	function callback(data) {
+	    const container = $('#gridContainer');
+	    let bList = '';
+
+	    $.each(data, function(index, item) {
+	        bList += "<div class='cList'>";
+	        bList += "<img src='img/img" + item.music_idx + ".jpg' alt='" + item.music_name + "'>";
+	        bList += "<h4>" + item.music_name + "</h4>";
+	        bList += "<h5>" + item.music_singer + "</h5>";
+	        bList += "<p>판매량: " + item.chart_sl + "</p>";
+	        bList += "<p>현재가: " + item.chart_now + "</p>";
+	        bList += "</div>";
+	    });
+
+	    console.log(bList); // 생성된 HTML 확인
+	    container.html(bList);
+	}
+	</script>
 	<script>
 		function showSignIn() {
 			document.querySelector('.signcontainer').style.display = 'block';

@@ -53,7 +53,7 @@
 						<li>${loginMember.user_nick}님환영합니다</li>
 						<li><a href="${cpath}/Logout.do">로그아웃</a></li>
 						<li><a href="sign.jsp">회원정보</a></li>
-						<li><a href="">찜목록</a></li>
+						<li><a href="${cpath}/likeList.do">찜목록</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>
@@ -278,7 +278,15 @@
             }
         });
     }
-
+	
+    function a (String url, String type, String dataType){
+    	return $.ajax({
+    		url: url,
+    		type: type,
+    		dataType: dataType
+    	})
+    }
+    
     function callback(data) {
         const container = $('#gridContainer');
         let bList = '';

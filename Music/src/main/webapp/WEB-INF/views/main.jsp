@@ -53,7 +53,7 @@
 						<li>${loginMember.user_nick}님환영합니다</li>
 						<li><a href="${cpath}/Logout.do">로그아웃</a></li>
 						<li><a href="sign.jsp">회원정보</a></li>
-						<li><a href="">찜목록</a></li>
+						<li><a href="LikeList.jsp">찜목록</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

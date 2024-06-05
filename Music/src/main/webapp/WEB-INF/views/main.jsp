@@ -53,11 +53,7 @@
 						<li>${loginMember.user_nick}님환영합니다</li>
 						<li><a href="${cpath}/Logout.do">로그아웃</a></li>
 						<li><a href="sign.jsp">회원정보</a></li>
-<<<<<<< HEAD
-						<li><a href="${cpath}/Like.do">찜목록</a></li>
-=======
-						<li><a href="${cpath}/likeList.do">찜목록</a></li>
->>>>>>> branch 'main' of https://github.com/2024-SMHRD-KDT-BigData-20/SongCredit.git
+						<li><a href="${cpath}/LikeList.do">찜목록</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

@@ -1,1 +1,1 @@
-select * from chart_info
+select * from music_info

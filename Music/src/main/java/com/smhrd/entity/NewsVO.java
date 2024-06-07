@@ -5,7 +5,7 @@ public class NewsVO {
 	private String news_title;
 	private String news_content;
 	private String news_thumb;
-	private String news_marker;
+	private String news_maker;
 	private String pressed_at;
 	private String news_link;
 	public int getNews_idx() {
@@ -33,10 +33,10 @@ public class NewsVO {
 		this.news_thumb = news_thumb;
 	}
 	public String getNews_marker() {
-		return news_marker;
+		return news_maker;
 	}
 	public void setNews_marker(String news_marker) {
-		this.news_marker = news_marker;
+		this.news_maker = news_marker;
 	}
 	public String getPressed_at() {
 		return pressed_at;
@@ -53,7 +53,7 @@ public class NewsVO {
 	@Override
 	public String toString() {
 		return "NewsVO [news_idx=" + news_idx + ", news_title=" + news_title + ", news_content=" + news_content
-				+ ", news_thumb=" + news_thumb + ", news_marker=" + news_marker + ", pressed_at=" + pressed_at
+				+ ", news_thumb=" + news_thumb + ", news_marker=" + news_maker + ", pressed_at=" + pressed_at
 				+ ", news_link=" + news_link + "]";
 	}
 	

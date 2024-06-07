@@ -1,5 +1,7 @@
 package com.smhrd.entity;
 
+
+
 public class Member {
 
 	// 객체가 잘 설계되었는지 확인하는 방법
@@ -10,9 +12,9 @@ public class Member {
 	// 4. (선택적) 생성자 메소드 
 	
 	private String user_id;
-	private String user_nick;
 	private String user_pw;
 	private String user_email;
+	private String user_nick;
 	private String user_birth;
 	private String user_gender;
 	private String joined_at;

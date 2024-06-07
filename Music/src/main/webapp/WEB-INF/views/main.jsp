@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- 페이지내에서 jstl을 사용해서 변수로 프로젝트 ContextPath 저장 --%>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
@@ -24,19 +24,19 @@
 				<ul>
 					<li><a href="main.jsp">홈</a></li>
 					<li><a href="chartList.do">차트</a></li>
-					<li><a href="news.jsp">뉴스</a></li>
+					<li><a href="news.do">뉴스</a></li>
 				</ul>
 			</nav>
 		</div>
 		<div class="logo">
-			<a href="main.html">Logo</a>
+			<a href="main.jsp">Logo</a>
 		</div>
 		<div class="search">
-			<img src="img/search.png"> <input type="text"
+			<img src="../resources/img/search.png"> <input type="text"
 				placeholder="Search...">
 		</div>
 		<div class="mypage-icon">
-			<a href="#"> <img src="img/my.png" alt="">
+			<a href="#"> <img src="../resources/img/my.png" alt="">
 			</a>
 		</div>
 		<div class="mypage">
@@ -62,16 +62,15 @@
 	</div>
 	<div class="main">
 		<!-- 메인 컨테이너 -->
-        <div class="maincontainer">
-        	<div class="TopMusicChart">
-            	<i>Top 추천곡 리스트</i>
-            	<button id="prevBtn">이전</button>
-            	<div class="slider" id="gridContainer">
-            	</div>
-            	<button id="nextBtn">다음</button>
-            </div>
-            <div class="TopMusicCowList"></div>
-        </div>
+		<div class="maincontainer">
+			<div class="TopMusicChart">
+				<i>Top 추천곡 리스트</i>
+				<button id="prevBtn">이전</button>
+				<div class="slider" id="gridContainer"></div>
+				<button id="nextBtn">다음</button>
+			</div>
+			<div class="TopMusicCowList"></div>
+		</div>
 		<!-- 로그인 컨테이너 -->
 		<div class="signcontainer" style="display: none">
 			<div class="text-box">

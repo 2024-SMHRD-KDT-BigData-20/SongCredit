@@ -39,9 +39,9 @@
 		</div>
 		<div class="mypage">
 			<ul>
-				<li><a href="logout.do">로그아웃</a></li>
+				<li><a href="${cpath}/Logout.do">로그아웃</a></li>
 				<li><a href="sign.html">회원정보</a></li>
-				<li><a href="">찜목록</a>
+				<li><a href="">찜목록</a></li>
 			</ul>
 		</div>
 	</div>
@@ -55,9 +55,9 @@
 			</tr>
 			<c:forEach var="item" items="${LikeList}" >
 			<tr>
+				<td>${item.interest_idx}</td>
 				<td>${item.user_id}</td>
 				<td>${item.music_idx}</td>
-				<td>${item.interest_idx}</td>
 				<td>${item.created_at}</td>
 			</tr>
 			</c:forEach>

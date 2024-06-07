@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- 페이지내에서 jstl을 사용해서 변수로 프로젝트 ContextPath 저장 --%>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
@@ -24,19 +24,19 @@
 				<ul>
 					<li><a href="main.jsp">홈</a></li>
 					<li><a href="chartList.do">차트</a></li>
-					<li><a href="news.jsp">뉴스</a></li>
+					<li><a href="news.do">뉴스</a></li>
 				</ul>
 			</nav>
 		</div>
 		<div class="logo">
-			<a href="main.html">Logo</a>
+			<a href="main.jsp">Logo</a>
 		</div>
 		<div class="search">
-			<img src="img/search.png"> <input type="text"
+			<img src="../resources/img/search.png"> <input type="text"
 				placeholder="Search...">
 		</div>
 		<div class="mypage-icon">
-			<a href="#"> <img src="img/my.png" alt="">
+			<a href="#"> <img src="../resources/img/my.png" alt="">
 			</a>
 		</div>
 		<div class="mypage">
@@ -62,16 +62,15 @@
 	</div>
 	<div class="main">
 		<!-- 메인 컨테이너 -->
-        <div class="maincontainer">
-        	<div class="TopMusicChart">
-            	<i>Top 추천곡 리스트</i>
-            	<button id="prevBtn">이전</button>
-            	<div class="slider" id="gridContainer">
-            	</div>
-            	<button id="nextBtn">다음</button>
-            </div>
-            <div class="TopMusicCowList"></div>
-        </div>
+		<div class="maincontainer">
+			<div class="TopMusicChart">
+				<i>Top 추천곡 리스트</i>
+				<button id="prevBtn">이전</button>
+				<div class="slider" id="gridContainer"></div>
+				<button id="nextBtn">다음</button>
+			</div>
+			<div class="TopMusicCowList"></div>
+		</div>
 		<!-- 로그인 컨테이너 -->
 		<div class="signcontainer" style="display: none">
 			<div class="text-box">
@@ -251,105 +250,190 @@
 		</div>
 	</div>
 	<script>
-    $(document).ready(function() {
-        // 게시글 목록 가져오는 함수 실행
-        chartList();
+		$(document).ready(function() {
+			// 게시글 목록 가져오는 함수 실행
+			fetchAllData();
 
-        $('#prevBtn').click(function() {
-            slide(-1);
-        });
+			$('#prevBtn').click(function() {
+				slide(-1);
+			});
 
-        $('#nextBtn').click(function() {
-            slide(1);
-        });
-    });
+			$('#nextBtn').click(function() {
+				slide(1);
+			});
+		});
 
-    let currentSlide = 0;
-    const itemsPerPage = 6;
+		let currentSlide = 0;
+		const itemsPerPage = 6;
 
-    function chartList() {
-        $.ajax({
-            url: "${cpath}/chart", // 서버 URL에 ${cpath} 사용
-            type: "get",
-            dataType: "json",
-            success: callback,
-            error: function() {
-                alert("데이터를 가져오는데 실패했습니다.");
-            }
-        });
-    }
+		function fetchAllData() {
+			// 여러 AJAX 요청을 묶어서 처리
+			$.when(a("${cpath}/chart", "json", "get"),
+					a("${cpath}/musicCow", "json", "get"),
+					a("${cpath}/news","json","get")).done(
+					function(chartData, musicData, newsData) {
+						// chartData[0]와 musicData[0]는 각각의 요청 결과 데이터입니다.
+						callback(chartData[0], musicData[0]);
+					}).fail(function() {
+				alert("데이터를 가져오는데 실패했습니다.");
+			});
+		}
+
+		function a(url, dataType, type) {
+			return $.ajax({
+				url : url,
+				type : type,
+				dataType : dataType
+			});
+		}
+
+		function callback(chartData, musicData, newsData) {
+			const container = $('#gridContainer');
+			let bList = '';
+
+			// chartData와 musicData를 모두 사용하여 HTML 생성
+			$.each(
+							chartData,
+							function(index, item) {
+								bList += "<div class='cList'>";
+								bList += "<a href='javascript:chartview("
+										+ item.chart_idx + ")'>";
+								bList += "<img src='img/img" + item.music_idx + ".jpg' alt='" + item.mussic_name + "'>";
+								bList += "<h4>" + item.music_name + "</h4>";
+								bList += "<h5>" + item.music_singer + "</h5>";
+								bList += "<p>판매량: " + item.chart_sl + "</p>";
+								bList += "<p>현재가: " + item.chart_now + "</p>";
+								bList += "</a>";
+								bList += "</div>";
+							});
+			console.log(bList);
+			container.html(bList);
+			updateSlider();
+
+			// 음악 데이터를 테이블에 추가
+			updateMusicTable(musicData);
+		}
+
+		function updateMusicTable(musicData) {
+			let tableBody = '';
+
+			$.each(musicData, function(index, item) {
+				tableBody += "<tr>";
+				tableBody += "<td>" + item.music_name + "</td>";
+				tableBody += "<td>" + item.music_singer + "</td>";
+				tableBody += "<td>" + item.chart_sl + "</td>";
+				tableBody += "<td>" + item.chart_now + "</td>";
+				tableBody += "<td>" + item.chart_prv + "</td>";
+				tableBody += "</tr>";
+			});
+
+			$('.topmusiccowtable tbody').html(tableBody);
+		}
+		
+		function updatenewsList(newsData){
+			let newsTable = '';
+			$.each(graph, funtion(index, news){
+				newsTable += "<tr>"
+				newsTable += "<td>" + news.news_name + "</td>";
+				newsTable += "<td>" + news.news.date + "</td>";
+				newsTable += "</tr>"
+			});
+			
+			$('.TopMusicCow')
+		}
+
+		function chartList(chartdata, graph) {
+			let Chartlist = '';
+
+			$.each(chartdata, function(index, chart) {
+				Chartlist += "<div class='music-img'>";
+				Chartlist += "<img src='" + chart.music_album + "'>";
+				Chartlist += "</div>";
+				Chartlist += "<div class='music-info'>";
+				Chartlist += "<div class='music-name'>" + chart.music_name
+						+ "</div>";
+				Chartlist += "<div class='music-name'>" + chart.music_singer
+						+ "</div>";
+				Chartlist += "</div>";
+			});
+
+			$.each(graph, function(index, graphItem) {
+				Graphlist += "<div class='" + graphItem.className
+						+ "' onclick=\"updateChart('" + graphItem.option
+						+ "')\">" + graphItem.option + "</div>";
+			});
+
+			// Append the generated lists to the appropriate containers
+			$('.chart-nav').html(Graphlist);
+			$('#chartContainer').html(Chartlist);
+		}
+		function chartview(chart_idx) {
+		    $.ajax({
+		        url: "${cpath}/chartlist.do",
+		        type: "get",
+		        data: { chart_idx: chart_idx },
+		        dataType: "json",
+		        success: function(data) {
+		            // 새로운 창을 열고 데이터를 표시하는 로직을 구현
+		            let newWindow = window.open('', '_blank');
+		            let content = generateContent(data);
+		            newWindow.document.write(content);
+		        },
+		        error: function() {
+		            alert("데이터를 가져오는데 실패했습니다.");
+		        }
+		    });
+		}function generateContent(data) {
+		    return `
+		    <html>
+	        <head>
+	            <title>${data.music_name}</title>
+	        </head>
+	        <body>
+	            <div class="content">
+	                <div class="image-section">
+	                    <img src="img/img${data.music_idx}.jpg" alt="${data.music_name}">
+	                    <div class="details">
+	                        <h1>노래 제목(${data.release_date})</h1>
+	                        <h2>가수</h2>
+	                    </div>
+	                </div>
+	                <div class="chart-nav">
+	                    <div class="price">시세</div>
+	                    <div class="views">조회수</div>
+	                    <div class="like">좋아요수</div>
+	                    <div class="streaming">스트리밍수</div>
+	                    <div class="keyword">키워드</div>
+	                    <div class="volume">거래량</div>
+	                    <div class="emotion">감정분석</div>
+	                </div>
+	                <div class="myChart">
+	                    <canvas id="myChart"></canvas>
+	                </div>
+	            </div>
+	        </body>
+	        </html>`;}
 	
-    function a (String url, String type, String dataType){
-    	return $.ajax({
-    		url: url,
-    		type: type,
-    		dataType: dataType
-    	})
-    }
-    
-    function callback(data) {
-        const container = $('#gridContainer');
-        let bList = '';
+		function slide(direction) {
+			const totalItems = $('#gridContainer .cList').length;
+			const totalPages = Math.ceil(totalItems / itemsPerPage);
+			currentSlide += direction;
 
-        $.each(data, function(index, item) {
-            bList += "<div class='cList'>";
-            bList += "<img src='img/img" + item.music_idx + ".jpg' alt='" + item.music_name + "'>";
-            bList += "<h4>" + item.music_name + "</h4>";
-            bList += "<h5>" + item.music_singer + "</h5>";
-            bList += "<p>판매량: " + item.chart_sl + "</p>";
-            bList += "<p>현재가: " + item.chart_now + "</p>";
-            bList += "</div>";
-        });
+			if (currentSlide < 0) {
+				currentSlide = totalPages - 1;
+			} else if (currentSlide >= totalPages) {
+				currentSlide = 0;
+			}
 
-        container.html(bList);
-        updateSlider();
-    }
-
-    function slide(direction) {
-        const totalItems = $('#gridContainer .cList').length;
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
-        currentSlide += direction;
-
-        if (currentSlide < 0) {
-            currentSlide = totalPages - 1;
-        } else if (currentSlide >= totalPages) {
-            currentSlide = 0;
-        }
-
-        updateSlider();
-    }
-
-    function updateSlider() {
-        const items = $('#gridContainer .cList');
-        const start = currentSlide * itemsPerPage;
-        const end = start + itemsPerPage;
-
-        items.hide().slice(start, end).show();
-    }
-	</script>
-	<script>
-		function showSignIn() {
-			document.querySelector('.signcontainer').style.display = 'block';
-			document.querySelector('.joincontainer').style.display = "none";
-			document.querySelector(".FindPwcontainer").style.display = 'none';
-			document.querySelector(".FindIdcontainer").style.display = 'none';
-
+			updateSlider();
 		}
-		function showJoinIn() {
-			document.querySelector('.joincontainer').style.display = "block";
-			document.querySelector('.signcontainer').style.display = "none";
-			document.querySelector(".FindPwcontainer").style.display = 'none';
-			document.querySelector(".FindIdcontainer").style.display = 'none';
-		}
-		function showFindPw() {
-			document.querySelector(".FindIdcontainer").style.display = 'none';
-			document.querySelector(".FindPwcontainer").style.display = 'block';
-		}
-		function showFindId() {
-			document.querySelector('.signcontainer').style.display = "none";
-			document.querySelector('.joincontainer').style.display = "none";
-			document.querySelector(".FindIdcontainer").style.display = 'block';
-			document.querySelector(".FindPwcontainer").style.display = 'none';
+
+		function updateSlider() {
+			const items = $('#gridContainer .cList');
+			const start = currentSlide * itemsPerPage;
+			const end = start + itemsPerPage;
+
+			items.hide().slice(start, end).show();
 		}
 	</script>
 	<script src="${cpath }/resources/js/index.js" type="text/javascript"></script>

@@ -4,4 +4,9 @@
 	<select id="chartList" resultType="com.smhrd.entity.Chart">
 		select * from chart_info
 	</select>
+
+	<select id="getChartById" parameterType="int"
+		resultType="com.smhrd.entity.Chart">
+		select * from chart_info where chart_indx = #{chart_indx}
+	</select>
 </mapper>

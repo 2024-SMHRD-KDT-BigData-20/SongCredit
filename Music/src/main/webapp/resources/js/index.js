@@ -207,3 +207,28 @@ document.addEventListener("DOMContentLoaded", function() {
       fullEmailInputEl.value = `${emailPart}@${domainPart}`;
   }
 });
+
+
+		function showSignIn() {
+			document.querySelector('.signcontainer').style.display = 'block';
+			document.querySelector('.joincontainer').style.display = "none";
+			document.querySelector(".FindPwcontainer").style.display = 'none';
+			document.querySelector(".FindIdcontainer").style.display = 'none';
+
+		}
+		function showJoinIn() {
+			document.querySelector('.joincontainer').style.display = "block";
+			document.querySelector('.signcontainer').style.display = "none";
+			document.querySelector(".FindPwcontainer").style.display = 'none';
+			document.querySelector(".FindIdcontainer").style.display = 'none';
+		}
+		function showFindPw() {
+			document.querySelector(".FindIdcontainer").style.display = 'none';
+			document.querySelector(".FindPwcontainer").style.display = 'block';
+		}
+		function showFindId() {
+			document.querySelector('.signcontainer').style.display = "none";
+			document.querySelector('.joincontainer').style.display = "none";
+			document.querySelector(".FindIdcontainer").style.display = 'block';
+			document.querySelector(".FindPwcontainer").style.display = 'none';
+		}

@@ -1,17 +1,17 @@
 package com.smhrd.entity;
 
 public class Chart {
-	private int chart_idx;
+	private int chart_indx;
 	private String music_idx;
 	private String music_name;
 	private String music_singer;
 	private int chart_sl;
 	private int chart_now;
-	public int getChart_idx() {
-		return chart_idx;
+	public int getChart_indx() {
+		return chart_indx;
 	}
-	public void setChart_idx(int chart_idx) {
-		this.chart_idx = chart_idx;
+	public void setChart_idx(int chart_indx) {
+		this.chart_indx = chart_indx;
 	}
 	public String getMusic_idx() {
 		return music_idx;
@@ -45,7 +45,7 @@ public class Chart {
 	}
 	@Override
 	public String toString() {
-		return "Chart [chart_idx=" + chart_idx + ", music_idx=" + music_idx + ", music_name=" + music_name
+		return "Chart [chart_indx=" + chart_indx + ", music_idx=" + music_idx + ", music_name=" + music_name
 				+ ", music_singer=" + music_singer + ", chart_sl=" + chart_sl + ", chart_now=" + chart_now + "]";
 	}
 }

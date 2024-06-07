@@ -39,18 +39,9 @@
 		</div>
 		<div class="mypage">
 			<ul>
-				<li><a href="logout.java">로그아웃</a></li>
+				<li><a href="logout.do">로그아웃</a></li>
 				<li><a href="sign.html">회원정보</a></li>
 				<li><a href="">찜목록</a>
-					<table>
-						<tr>
-							<th>사용자 아이디</th>
-							<th>관심 아이디</th>
-							<th>음악 아이디</th>
-							<th>생성일자</th>
-						</tr>
-					</table></li>
-
 			</ul>
 		</div>
 	</div>
@@ -63,12 +54,11 @@
 				<th>생성일자</th>
 			</tr>
 			<c:forEach var="item" items="${LikeList}" >
-	${item}
 			<tr>
-				<td>${item}</td>
-				<td>${item.userId}</td>
-				<td>music01</td>
-				<td>2024-06-01</td>
+				<td>${item.user_id}</td>
+				<td>${item.music_idx}</td>
+				<td>${item.interest_idx}</td>
+				<td>${item.created_at}</td>
 			</tr>
 			</c:forEach>
 

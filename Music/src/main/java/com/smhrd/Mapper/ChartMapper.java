@@ -8,4 +8,6 @@ public interface ChartMapper {
 
 	List<Chart> chartList();
 
+	Chart getChartById(int chart_indx);
+
 }

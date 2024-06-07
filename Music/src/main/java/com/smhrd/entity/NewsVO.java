@@ -32,10 +32,10 @@ public class NewsVO {
 	public void setNews_thumb(String news_thumb) {
 		this.news_thumb = news_thumb;
 	}
-	public String getNews_marker() {
+	public String getNews_maker() {
 		return news_maker;
 	}
-	public void setNews_marker(String news_marker) {
+	public void setNews_maker(String news_marker) {
 		this.news_maker = news_marker;
 	}
 	public String getPressed_at() {

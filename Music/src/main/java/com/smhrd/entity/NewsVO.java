@@ -5,7 +5,7 @@ public class NewsVO {
 	private String news_title;
 	private String news_content;
 	private String news_thumb;
-	private String news_maker;
+	private String news_marker;
 	private String pressed_at;
 	private String news_link;
 	public int getNews_idx() {
@@ -32,11 +32,11 @@ public class NewsVO {
 	public void setNews_thumb(String news_thumb) {
 		this.news_thumb = news_thumb;
 	}
-	public String getNews_maker() {
-		return news_maker;
+	public String getNews_marker() {
+		return news_marker;
 	}
-	public void setNews_maker(String news_marker) {
-		this.news_maker = news_marker;
+	public void setNews_marker(String news_marker) {
+		this.news_marker = news_marker;
 	}
 	public String getPressed_at() {
 		return pressed_at;

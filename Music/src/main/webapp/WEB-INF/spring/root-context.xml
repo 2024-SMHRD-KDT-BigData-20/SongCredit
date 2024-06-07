@@ -11,7 +11,7 @@
 	<!-- com.zaxxer.hikari.HikariConfig.class -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
- 	    <property name="jdbcUrl" value="jdbc:mysql://project-db-cgi.smhrd.com:3307/sc_21K_bigdata11_p3_2?useSSL=false&amp;serverTimezone=UTC" />
+	    <property name="jdbcUrl" value="jdbc:mysql://project-db-cgi.smhrd.com:3307/sc_21K_bigdata11_p3_2?useSSL=false&amp;serverTimezone=UTC" />
 	    <property name="username" value="sc_21K_bigdata11_p3_2" />
 	    <property name="password" value="smhrd2" />
 	</bean>	

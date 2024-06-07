@@ -70,7 +70,7 @@
 				<button id="nextBtn">다음</button>
 			</div>
 			<div class="topnewsList">
-			<i>뉴스 정보 리스트</i>
+				<i>뉴스 정보 리스트</i>
 				<table>
 					<thead>
 						<tr>
@@ -266,121 +266,9 @@
 		</div>
 	</div>
 	<script>
-		$(document).ready(function() {
-			// 게시글 목록 가져오는 함수 실행
-			fetchAllData();
-
-			$('#prevBtn').click(function() {
-				slide(-1);
-			});
-
-			$('#nextBtn').click(function() {
-				slide(1);
-			});
-		});
-
-		let currentSlide = 0;
-		const itemsPerPage = 6;
-
-		function fetchAllData() {
-			// 여러 AJAX 요청을 묶어서 처리
-			$.when(a("${cpath}/chart", "json", "get"),
-					a("${cpath}/topnewsList", "json", "get")).done(
-					function(chartData, newsData) {
-						callback(chartData[0], newsData[0]);
-					}).fail(function() {
-				alert("데이터를 가져오는데 실패했습니다.");
-			});
-		}
-
-		function a(url, dataType, type) {
-			return $.ajax({
-				url : url,
-				type : type,
-				dataType : dataType
-			});
-		}
-
-		function callback(chartData, newsData) {
-			updateChartList(chartData);
-			updatenewsList(newsData);
-		}
-
-		function updateChartList(chartData) {
-
-			const container = $('#gridContainer');
-			let bList = '';
-
-			// chartData와 musicData를 모두 사용하여 HTML 생성
-			$
-					.each(
-							chartData,
-							function(index, item) {
-								bList += "<div class='cList'>";
-								bList += "<a href='javascript:chartview("
-										+ item.chart_idx + ")'>";
-								bList += "<img src='img/img" + item.music_idx + ".jpg' alt='" + item.mussic_name + "'>";
-								bList += "<h4>" + item.music_name + "</h4>";
-								bList += "<h5>" + item.music_singer + "</h5>";
-								bList += "<p>판매량: " + item.chart_sl + "</p>";
-								bList += "<p>현재가: " + item.chart_now + "</p>";
-								bList += "</a>";
-								bList += "</div>";
-							});
-			container.html(bList);
-			updateSlider();
-		}
-		function updateMusicTable(musicData) {
-			let tableBody = '';
-
-			$.each(musicData, function(index, item) {
-				tableBody += "<tr>";
-				tableBody += "<td>" + item.music_name + "</td>";
-				tableBody += "<td>" + item.music_singer + "</td>";
-				tableBody += "<td>" + item.chart_sl + "</td>";
-				tableBody += "<td>" + item.chart_now + "</td>";
-				tableBody += "<td>" + item.chart_prv + "</td>";
-				tableBody += "</tr>";
-			});
-
-			$('.topmusiccowtable tbody').html(tableBody);
-		}
-
-		function updatenewsList(newsData) {
-			let topnewslist = $('#newsbody');
-			let newsTable = '';
-			const newssData = newsData.slice(0, 10);
-			$.each(newssData, function(index, news) {
-				newsTable += "<tr>"
-				newsTable += "<td>" + news.news_title + "</td>";
-				newsTable += "<td>" + news.pressed_at + "</td>";
-				newsTable += "</tr>";
-			});
-			topnewslist.html(newsTable);
-		}
-
-		function slide(direction) {
-			const totalItems = $('#gridContainer .cList').length;
-			const totalPages = Math.ceil(totalItems / itemsPerPage);
-			currentSlide += direction;
-
-			if (currentSlide < 0) {
-				currentSlide = totalPages - 1;
-			} else if (currentSlide >= totalPages) {
-				currentSlide = 0;
-			}
-
-			updateSlider();
-		}
-
-		function updateSlider() {
-			const items = $('#gridContainer .cList');
-			const start = currentSlide * itemsPerPage;
-			const end = start + itemsPerPage;
-
-			items.hide().slice(start, end).show();
-		}
+		var cpath = "${cpath}";
 	</script>
+	<script src="${cpath}/resources/js/main.js"></script>
 	<script src="${cpath }/resources/js/index.js" type="text/javascript"></script>
 </body>
 

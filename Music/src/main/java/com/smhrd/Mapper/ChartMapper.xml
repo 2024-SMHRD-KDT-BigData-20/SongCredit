@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.Mapper.ChartMapper">
-	<select id="chartList" resultType="com.smhrd.entity.Chart">
-		select * from chart_info
-	</select>
+    <select id="chartList" resultType="com.smhrd.entity.Chart">
+        SELECT * FROM chart_info
+    </select>
 
-	<select id="getChartById" parameterType="int"
-		resultType="com.smhrd.entity.Chart">
-		select * from chart_info where chart_indx = #{chart_indx}
-	</select>
+    <select id="getChartById" parameterType="int" resultType="com.smhrd.entity.Chart">
+        select * from chart_info where chart_indx = #{chart_indx}
+    </select>
 </mapper>

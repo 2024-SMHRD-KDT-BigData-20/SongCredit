@@ -349,14 +349,13 @@
 		function updatenewsList(newsData) {
 			let topnewslist = $('#newsbody');
 			let newsTable = '';
-			const newssData = newsData.slice(0,10);
+			const newssData = newsData.slice(0, 10);
 			$.each(newssData, function(index, news) {
 				newsTable += "<tr>"
 				newsTable += "<td>" + news.news_title + "</td>";
 				newsTable += "<td>" + news.pressed_at + "</td>";
 				newsTable += "</tr>";
 			});
-			console.log(newsTable);
 			topnewslist.html(newsTable);
 		}
 

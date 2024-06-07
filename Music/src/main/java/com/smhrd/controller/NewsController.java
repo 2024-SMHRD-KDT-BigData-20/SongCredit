@@ -33,6 +33,7 @@ public class NewsController {
 		nv = newsList.get(i);
 		System.out.println("뉴스리스트 사이즈 : " + newsList.size());
 		System.out.println("0번째 뉴스 : " + nv.getNews_content());		
+		System.out.println("언론사 : " + nv.getNews_maker());		
 		}
 		model.addAttribute("NewsList" , newsList);
 		

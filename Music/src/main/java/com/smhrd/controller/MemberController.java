@@ -25,7 +25,10 @@ public class MemberController {
 	    Member loginMember = mmaper.memberLogin(mvo);
 	    
 	    if (loginMember != null) {
-	        session.setAttribute("loginMember", loginMember);
+	        session.setAttribute("loginMember", loginMember );
+	        System.out.println(loginMember);
+	        System.out.println( session.getAttribute("loginMember") );
+	        session.setMaxInactiveInterval(3600);
 	        return "redirect:/mainList.do";
 	    } else {
 	        // 로그인 실패 시 처리
@@ -73,11 +76,14 @@ public class MemberController {
 	
 	// 로그아웃
 	@RequestMapping("/Logout.do")
-	public String memberLogout(HttpSession session) {
+	public String memberLogout(HttpSession session, Member vo) {
+		Member memberSession = (Member) session.getAttribute("loginMember"); 
+		if( memberSession != null ) {
 		session.removeAttribute("loginMember");
-		
 		return "redirect:/mainList.do";
-	}
+		}
+		return "redirect:/mainList.do";
+		}
 	
 	
 }

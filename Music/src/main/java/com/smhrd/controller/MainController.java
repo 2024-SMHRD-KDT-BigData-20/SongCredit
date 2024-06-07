@@ -3,6 +3,7 @@ package com.smhrd.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,15 @@ public class MainController {
 	// 어떤 요청을 처리할지 연결(mapping)할지 맵핑기호
 	// @RequestMapping("/요청내용")
 	@RequestMapping("/mainList.do")
-	public String boardList() {
+	public String boardList( HttpServletRequest request ) {
 		// view page name 결과로 돌려준다.
 		// WEB-INF / views _____.jsp (ViewResolver에 의해)
+		
+//		HttpSession session = request.getSession();
+//		
+//		if( session != null ) {
+//			session.removeAttribute("loginMember");
+//		} 
 		return "main";
 	}
 	// ajax에서 get방식으로 요청이 넘어옴

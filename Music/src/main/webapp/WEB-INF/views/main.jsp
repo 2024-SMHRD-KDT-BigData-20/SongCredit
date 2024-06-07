@@ -62,14 +62,30 @@
 	</div>
 	<div class="main">
 		<!-- 메인 컨테이너 -->
-		<div class="maincontainer">
+		<div class="maincontainer" id="maincontainer">
 			<div class="TopMusicChart">
 				<i>Top 추천곡 리스트</i>
 				<button id="prevBtn">이전</button>
 				<div class="slider" id="gridContainer"></div>
 				<button id="nextBtn">다음</button>
 			</div>
-			<div class="TopMusicCowList"></div>
+			<div class="topnewsList">
+			<i>뉴스 정보 리스트</i>
+				<table>
+					<thead>
+						<tr>
+							<th>뉴스목록</th>
+						</tr>
+						<tr>
+							<!-- <td>썸네일</td> -->
+							<td>제목</td>
+							<td>날짜</td>
+						</tr>
+					</thead>
+					<tbody class="newtbody" id="newsbody">
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<!-- 로그인 컨테이너 -->
 		<div class="signcontainer" style="display: none">
@@ -269,11 +285,9 @@
 		function fetchAllData() {
 			// 여러 AJAX 요청을 묶어서 처리
 			$.when(a("${cpath}/chart", "json", "get"),
-					a("${cpath}/musicCow", "json", "get"),
-					a("${cpath}/news","json","get")).done(
-					function(chartData, musicData, newsData) {
-						// chartData[0]와 musicData[0]는 각각의 요청 결과 데이터입니다.
-						callback(chartData[0], musicData[0]);
+					a("${cpath}/topnewsList", "json", "get")).done(
+					function(chartData, newsData) {
+						callback(chartData[0], newsData[0]);
 					}).fail(function() {
 				alert("데이터를 가져오는데 실패했습니다.");
 			});
@@ -287,12 +301,19 @@
 			});
 		}
 
-		function callback(chartData, musicData, newsData) {
+		function callback(chartData, newsData) {
+			updateChartList(chartData);
+			updatenewsList(newsData);
+		}
+
+		function updateChartList(chartData) {
+
 			const container = $('#gridContainer');
 			let bList = '';
 
 			// chartData와 musicData를 모두 사용하여 HTML 생성
-			$.each(
+			$
+					.each(
 							chartData,
 							function(index, item) {
 								bList += "<div class='cList'>";
@@ -306,14 +327,9 @@
 								bList += "</a>";
 								bList += "</div>";
 							});
-			console.log(bList);
 			container.html(bList);
 			updateSlider();
-
-			// 음악 데이터를 테이블에 추가
-			updateMusicTable(musicData);
 		}
-
 		function updateMusicTable(musicData) {
 			let tableBody = '';
 
@@ -329,91 +345,21 @@
 
 			$('.topmusiccowtable tbody').html(tableBody);
 		}
-		
-		function updatenewsList(newsData){
+
+		function updatenewsList(newsData) {
+			let topnewslist = $('#newsbody');
 			let newsTable = '';
-			$.each(graph, funtion(index, news){
+			const newssData = newsData.slice(0,10);
+			$.each(newssData, function(index, news) {
 				newsTable += "<tr>"
-				newsTable += "<td>" + news.news_name + "</td>";
-				newsTable += "<td>" + news.news.date + "</td>";
-				newsTable += "</tr>"
+				newsTable += "<td>" + news.news_title + "</td>";
+				newsTable += "<td>" + news.pressed_at + "</td>";
+				newsTable += "</tr>";
 			});
-			
-			$('.TopMusicCow')
+			console.log(newsTable);
+			topnewslist.html(newsTable);
 		}
 
-		function chartList(chartdata, graph) {
-			let Chartlist = '';
-
-			$.each(chartdata, function(index, chart) {
-				Chartlist += "<div class='music-img'>";
-				Chartlist += "<img src='" + chart.music_album + "'>";
-				Chartlist += "</div>";
-				Chartlist += "<div class='music-info'>";
-				Chartlist += "<div class='music-name'>" + chart.music_name
-						+ "</div>";
-				Chartlist += "<div class='music-name'>" + chart.music_singer
-						+ "</div>";
-				Chartlist += "</div>";
-			});
-
-			$.each(graph, function(index, graphItem) {
-				Graphlist += "<div class='" + graphItem.className
-						+ "' onclick=\"updateChart('" + graphItem.option
-						+ "')\">" + graphItem.option + "</div>";
-			});
-
-			// Append the generated lists to the appropriate containers
-			$('.chart-nav').html(Graphlist);
-			$('#chartContainer').html(Chartlist);
-		}
-		function chartview(chart_idx) {
-		    $.ajax({
-		        url: "${cpath}/chartlist.do",
-		        type: "get",
-		        data: { chart_idx: chart_idx },
-		        dataType: "json",
-		        success: function(data) {
-		            // 새로운 창을 열고 데이터를 표시하는 로직을 구현
-		            let newWindow = window.open('', '_blank');
-		            let content = generateContent(data);
-		            newWindow.document.write(content);
-		        },
-		        error: function() {
-		            alert("데이터를 가져오는데 실패했습니다.");
-		        }
-		    });
-		}function generateContent(data) {
-		    return `
-		    <html>
-	        <head>
-	            <title>${data.music_name}</title>
-	        </head>
-	        <body>
-	            <div class="content">
-	                <div class="image-section">
-	                    <img src="img/img${data.music_idx}.jpg" alt="${data.music_name}">
-	                    <div class="details">
-	                        <h1>노래 제목(${data.release_date})</h1>
-	                        <h2>가수</h2>
-	                    </div>
-	                </div>
-	                <div class="chart-nav">
-	                    <div class="price">시세</div>
-	                    <div class="views">조회수</div>
-	                    <div class="like">좋아요수</div>
-	                    <div class="streaming">스트리밍수</div>
-	                    <div class="keyword">키워드</div>
-	                    <div class="volume">거래량</div>
-	                    <div class="emotion">감정분석</div>
-	                </div>
-	                <div class="myChart">
-	                    <canvas id="myChart"></canvas>
-	                </div>
-	            </div>
-	        </body>
-	        </html>`;}
-	
 		function slide(direction) {
 			const totalItems = $('#gridContainer .cList').length;
 			const totalPages = Math.ceil(totalItems / itemsPerPage);

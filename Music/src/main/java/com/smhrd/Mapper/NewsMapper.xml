@@ -4,4 +4,11 @@
     <select id="topNewsList" resultType="com.smhrd.entity.NewsVO">
     	select * from news_info order by pressed_at 
     </select>
+        <select id="selectNewsList" resultType="com.smhrd.entity.NewsVO">
+        select 
+        	* 
+        from 
+        	news_info 
+    </select>
+    
 </mapper>

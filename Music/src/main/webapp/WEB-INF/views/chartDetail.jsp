@@ -10,42 +10,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
-    <div class="header">
-        <a href="#" class="hamburger-button">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </a>
-        <div class="overlay">
-            <nav class="menu">
-                <ul>
-                    <li><a href="${pageContext.request.contextPath}/main.jsp">홈</a></li>
-                    <li><a href="${pageContext.request.contextPath}/chart.jsp">차트</a></li>
-                    <li><a href="${pageContext.request.contextPath}/news.jsp">뉴스</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="logo">
-            <a href="${pageContext.request.contextPath}/main.jsp">Logo</a>
-        </div>
-        <div class="search">
-            <img src="${pageContext.request.contextPath}/resources/img/search.png">
-            <input type="text" placeholder="Search...">
-        </div>
-        <div class="mypage-icon">
-            <a href="#">
-                <img src="${pageContext.request.contextPath}/resources/img/my.png" alt="">
-            </a>
-        </div>
-        <div class="mypage">
-            <ul>
-                <li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
-                <li><a href="${pageContext.request.contextPath}/sign.jsp">회원정보</a></li>
-                <li><a href="#">찜목록</a></li>
-            </ul>
-        </div>
-    </div>
+	<script>
+		var cpath = "${pageContext.request.contextPath}";
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+	<script>
+		loadHeader(cpath);
+	</script>
     <div class="main">
         <div class="chart-music">
             <div class="music-img">

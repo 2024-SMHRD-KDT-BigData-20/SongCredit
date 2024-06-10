@@ -13,38 +13,13 @@
 </head>
 
 <body>
-	<div class="header">
-		<a href="#" class="hamburger-button"> <span></span> <span></span>
-			<span></span> <span></span>
-		</a>
-		<div class="overlay">
-			<nav class="menu">
-				<ul>
-					<li><a href="main.html">홈</a></li>
-					<li><a href="chart.html">차트</a></li>
-					<li><a href="news.html">뉴스</a></li>
-				</ul>
-			</nav>
-		</div>
-		<div class="logo">
-			<a href="main.html">Logo</a>
-		</div>
-		<div class="search">
-			<img src="../resources/img/search.png"> <input type="text"
-				placeholder="Search...">
-		</div>
-		<div class="mypage-icon">
-			<a href="#"> <img src="../resources/img/my.png" alt="">
-			</a>
-		</div>
-		<div class="mypage">
-			<ul>
-				<li><a href="logout.do">로그아웃</a></li>
-				<li><a href="sign.html">회원정보</a></li>
-				<li><a href="">찜목록</a>
-			</ul>
-		</div>
-	</div>
+	<script>
+		var cpath = "${cpath}";
+	</script>
+	<script src="${cpath}/resources/js/header.js"></script>
+	<script>
+		loadHeader(cpath);
+	</script>	
 	<div class="main">
 		<table>
 			<tr>

@@ -6,4 +6,6 @@ import com.smhrd.entity.NewsVO;
 
 public interface NewsService {
 	ArrayList<NewsVO> selectNewsList() throws Exception;
+//	커밋을 위한 주석추가
+
 }

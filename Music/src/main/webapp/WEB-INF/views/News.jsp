@@ -15,13 +15,7 @@
 </head>
 
 <body>
-	<script>
-		var cpath = "${cpath}";
-	</script>
-	<script src="${cpath}/resources/js/header.js"></script>
-	<script>
-		loadHeader(cpath);
-	</script>
+	<%@ include file="include/header.jsp" %>
     <div class="main">
             <table class="newsMainlist">
 			<thead>

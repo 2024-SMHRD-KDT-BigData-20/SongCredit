@@ -28,7 +28,7 @@ public class ChartRestController {
     }
     @GetMapping("/chartData.do")
     public Map<String, Object> getChartData(@RequestParam String type) {
-        Map<String, Object> response = new HashMap<>();	
+        Map<String, Object> response = new HashMap<>();
         int[] data = new int[13];
 
         // 임의 데이터 설정
@@ -61,5 +61,6 @@ public class ChartRestController {
         response.put("values", data);
         return response;
     }
+    
     
 }

@@ -1,12 +1,4 @@
-document.querySelector(".mypage-icon").addEventListener("click", function () {
-  const mypage = document.querySelector(".mypage");
-  // 현재 display 상태에 따라 토글
-  if (mypage.style.display === "flex") {
-    mypage.style.display = "none";
-  } else {
-    mypage.style.display = "flex";
-  }
-});
+
 
 document.addEventListener("DOMContentLoaded", function () {
   initializeHamburgerButton();

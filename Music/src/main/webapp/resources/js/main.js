@@ -28,7 +28,6 @@ function fetchAllData() {
 }
 
 function a(url, dataType, type) {
-    console.log("AJAX request to: " + url);
     return $.ajax({
         url: url,
         type: type,
@@ -37,7 +36,6 @@ function a(url, dataType, type) {
 }
 
 function callback(chartData, newsData) {
-    console.log("Callback function");
     updateChartList(chartData);
     updatenewsList(newsData);
 }

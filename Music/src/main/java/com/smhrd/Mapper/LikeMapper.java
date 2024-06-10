@@ -9,5 +9,4 @@ import com.smhrd.entity.Like;
 public interface LikeMapper {
 	public List<Like> selectLikeList(String user_id);
 	
-	
 }

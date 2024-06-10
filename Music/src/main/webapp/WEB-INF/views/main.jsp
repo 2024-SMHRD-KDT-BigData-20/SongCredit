@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- 페이지내에서 jstl을 사용해서 변수로 프로젝트 ContextPath 저장 --%>
-<c:set var="cpath" value="${pageContext.request.contextPath }" />
+<c:set var="cpath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="utf-8">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,15 +11,8 @@
 <link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
-	<script>
-		var cpath = "${cpath}";
-	</script>
-	<script src="${cpath}/resources/js/header.js"></script>
-	<script>
-		loadHeader(cpath);
-	</script>
+	<%@include file="include/header.jsp"%>
 	<div class="main">
 		<!-- 메인 컨테이너 -->
 		<div class="maincontainer" id="maincontainer">
@@ -49,46 +40,7 @@
 				</table>
 			</div>
 		</div>
-		<!-- 로그인 컨테이너 -->
-		<div class="signcontainer" style="display: none">
-			<div class="text-box">
-				<div>Sign In</div>
-			</div>
-			<form action="${cpath}/Login.do" method="post">
-				<div class="Text-Field">
-					<label for="">아이디</label>
-					<div class="input-box">
-						<input type="id" placeholder="아이디를 입력해주세요" class="id"
-							name="user_id">
-						<link rel="stylesheet"
-							href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-							integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-							crossorigin="anonymous" referrerpolicy="no-referrer">
-					</div>
-				</div>
-				<div class="Text-Field">
-					<label for="">비밀번호</label>
-					<div class="input-box password">
-						<input type="password" placeholder="비밀번호를 입력해주세요" class="password"
-							name="user_pw"> <span class="password-toggle-icon"><i
-							class="fas fa-eye"></i></span>
-					</div>
-				</div>
-				<div class="find">
-					<a href="javascript:void(0);" onclick="showFindId()">Forgot
-						Password?</a>
-				</div>
-
-				<div class="sep"></div>
-				<div class="link">
-					<a href="javascript:void(1);" onclick="showJoinIn()">go to the
-						Sign Up</a>
-				</div>
-				<div class="button">
-					<input type="submit" value="Sign In"></input>
-				</div>
-			</form>
-		</div>
+		<%@include file="include/Login.jsp"%>
 		<!-- 회원가입 컨테이너 -->
 		<div class="joincontainer" style="display: none">
 			<div class="text-box">
@@ -180,7 +132,7 @@
 			<div class="text-box">
 				<div>Find Id</div>
 			</div>
-			<form action="action=" ${cpath}/FindId.do" method="post">
+			<form action="${cpath}/FindId.do" method="post">
 				<div class="Text-Field">
 					<label for="">생년월일</label>
 					<div class="input-box">
@@ -205,7 +157,7 @@
 			<div class="text-box">
 				<div>Find Pw</div>
 			</div>
-			<form action="action=" ${cpath}/Findpw.do" method="post">
+			<form action="${cpath}/Findpw.do" method="post">
 				<div class="Text-Field">
 					<label for="">아이디</label>
 					<div class="input-box">
@@ -228,10 +180,107 @@
 		</div>
 	</div>
 	<script>
-		var cpath = "${cpath}";
-	</script>
-	<script src="${cpath}/resources/js/main.js"></script>
-	<script src="${cpath }/resources/js/index.js" type="text/javascript"></script>
-</body>
+		$(document).ready(function() {
+			console.log("Document ready");
+			fetchAllData();
 
+			$('#prevBtn').click(function() {
+				slide(-1);
+			});
+
+			$('#nextBtn').click(function() {
+				slide(1);
+			});
+		});
+
+		let currentSlide = 0;
+		const itemsPerPage = 6;
+
+		function fetchAllData() {
+			console.log("Fetching all data");
+			$.when(a("${cpath}/chart", "json", "get"),
+					a("${cpath}/topnewsList", "json", "get")).done(
+					function(chartData, newsData) {
+						console.log("Data fetched successfully");
+						callback(chartData[0], newsData[0]);
+					}).fail(function() {
+				alert("데이터를 가져오는데 실패했습니다.");
+				console.error("Failed to fetch data");
+			});
+		}
+
+		function a(url, dataType, type) {
+			return $.ajax({
+				url : url,
+				type : type,
+				dataType : dataType
+			});
+		}
+
+		function callback(chartData, newsData) {
+			updateChartList(chartData);
+			updatenewsList(newsData);
+		}
+
+		function updateChartList(chartData) {
+			const container = $('#gridContainer');
+			let bList = '';
+
+			$
+					.each(
+							chartData,
+							function(index, item) {
+								bList += "<div class='cList'>";
+								bList += "<a href='" + "${cpath}"
+										+ "/chartDetail.do?chart_indx="
+										+ item.chart_indx + "'>";
+								bList += "<img src='" + "${cpath}" + "/resources/img/img" + item.music_idx + ".jpg' alt='" + item.music_name + "'>";
+								bList += "<h4>" + item.music_name + "</h4>";
+								bList += "<h5>" + item.music_singer + "</h5>";
+								bList += "<p>판매량: " + item.chart_sl + "</p>";
+								bList += "<p>현재가: " + item.chart_now + "</p>";
+								bList += "</a>";
+								bList += "</div>";
+							});
+			container.html(bList);
+			updateSlider();
+		}
+
+		function updatenewsList(newsData) {
+			let topnewslist = $('#newsbody');
+			let newsTable = '';
+			const newssData = newsData.slice(0, 10);
+			$.each(newssData, function(index, news) {
+				newsTable += "<tr>";
+				newsTable += "<td>" + news.news_title + "</td>";
+				newsTable += "<td>" + news.pressed_at + "</td>";
+				newsTable += "</tr>";
+			});
+			topnewslist.html(newsTable);
+		}
+
+		function slide(direction) {
+			const totalItems = $('#gridContainer .cList').length;
+			const totalPages = Math.ceil(totalItems / itemsPerPage);
+			currentSlide += direction;
+
+			if (currentSlide < 0) {
+				currentSlide = totalPages - 1;
+			} else if (currentSlide >= totalPages) {
+				currentSlide = 0;
+			}
+
+			updateSlider();
+		}
+
+		function updateSlider() {
+			const items = $('#gridContainer .cList');
+			const start = currentSlide * itemsPerPage;
+			const end = start + itemsPerPage;
+
+			items.hide().slice(start, end).show();
+		}
+	</script>
+	<script src="${cpath}/resources/js/index.js" type="text/javascript"></script>
+</body>
 </html>

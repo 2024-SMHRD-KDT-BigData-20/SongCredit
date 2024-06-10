@@ -6,19 +6,19 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.smhrd.Mapper.NewsMapper;
 import com.smhrd.entity.NewsVO;
 import com.smhrd.service.NewsService;
 
-@RestController
+@Controller
 public class NewsController {
 
-	@Autowired
-	private NewsMapper nmapper;
+	@Autowired(required=true)
+	NewsMapper nmapper;
 
 	@Autowired(required=true)
 	NewsService NewsService;
@@ -35,7 +35,7 @@ public class NewsController {
 		nv = newsList.get(i);
 		System.out.println("뉴스리스트 사이즈 : " + newsList.size());
 		System.out.println("0번째 뉴스 : " + nv.getNews_content());		
-		System.out.println("언론사 :" + nv.getNews_marker());
+		System.out.println("언론사 :" + nv.getNews_maker());
 		}
 		model.addAttribute("NewsList" , newsList);
 		

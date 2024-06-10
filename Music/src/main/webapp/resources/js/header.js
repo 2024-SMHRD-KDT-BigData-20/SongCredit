@@ -7,14 +7,14 @@ function loadHeader(cpath) {
         <div class="overlay">
             <nav class="menu">
                 <ul>
-                    <li><a href="${cpath}/main.jsp">홈</a></li>
+                    <li><a href="${cpath}/mainList.do">홈</a></li>
                     <li><a href="${cpath}/chartList.do">차트</a></li>
                     <li><a href="${cpath}/news.do">뉴스</a></li>
                 </ul>
             </nav>
         </div>
         <div class="logo">
-            <a href="${cpath}/main.jsp">Logo</a></div>
+            <a href="${cpath}/mainList.do">Logo</a></div>
         <div class="search">
             <img src="${cpath}/resources/img/search.png"> <input type="text"
                 placeholder="Search...">

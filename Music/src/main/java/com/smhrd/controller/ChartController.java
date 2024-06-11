@@ -13,10 +13,13 @@ import com.smhrd.Mapper.ChartMapper;
 public class ChartController {
 
     @Autowired
-    private ChartMapper cmapper;
+    ChartMapper cmapper;
 
-    @GetMapping("/chartDetail.do")
-    public String chartDetail(@RequestParam("chart_indx") int chartIndx, Model model) {
+    @GetMapping("/chartDetail")
+    public String chartDetail(
+    		@RequestParam("chart_indx") int chartIndx, 
+    		Model model
+    	) {
         Chart chart = cmapper.getChartById(chartIndx);
         model.addAttribute("chart", chart);
         return "chartDetail";

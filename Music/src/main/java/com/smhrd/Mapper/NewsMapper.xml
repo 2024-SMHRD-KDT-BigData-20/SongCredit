@@ -9,6 +9,15 @@
         	* 
         from 
         	news_info 
+        limit ${(page - 1) * displayPageNum == 0 ? 0 : (page - 1) * displayPageNum }, ${displayPageNum }
     </select>
     
+    <select id="selectNewsListCount" resultType="Integer">
+        select 
+        	count( * )
+        from 
+        	news_info 
+    </select>    
+        
 </mapper>
+

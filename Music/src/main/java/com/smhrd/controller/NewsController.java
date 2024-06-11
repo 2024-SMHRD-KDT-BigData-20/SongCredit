@@ -9,31 +9,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.Mapper.NewsMapper;
 import com.smhrd.entity.NewsVO;
+import com.smhrd.entity.Pagination;
 import com.smhrd.service.NewsService;
+import com.smhrd.service.NewsServiceImpl;
 
 @Controller
 public class NewsController {
 	
-	@Autowired(required=true)
-	NewsService NewsService;
+	@Autowired
+	NewsServiceImpl NewsService;
 	
-	@GetMapping("/news.do")
-	public String NewsList(
+	@RequestMapping("news")
+	public ModelAndView NewsList(
 				HttpServletRequest request,
-				Model model
+				@RequestParam(value = "page", defaultValue = "1" ) int page
 				) throws Exception{
 		
-		NewsVO nv = new NewsVO();
-		ArrayList<NewsVO> newsList = NewsService.selectNewsList();
-		for (int i = 0; i < newsList.size(); i++) {
-		nv = newsList.get(i);
-		}
-		model.addAttribute("NewsList" , newsList);
+		ModelAndView mav = new ModelAndView("news");
 		
-		return "News";
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+		
+		ArrayList<NewsVO> newsList = NewsService.selectNewsList( pagination );
+		
+		
+		System.out.println( page );
+		System.out.println( pagination.getPage() );
+		System.out.println( pagination.getStartPage() );
+		System.out.println( pagination.getEndPage() );
+		System.out.println( newsList );
+		
+		mav.addObject("NewsList" , newsList );
+		mav.addObject("pagination" , pagination );
+		mav.addObject("page" , page );
+		return mav;
 	}
 
 }

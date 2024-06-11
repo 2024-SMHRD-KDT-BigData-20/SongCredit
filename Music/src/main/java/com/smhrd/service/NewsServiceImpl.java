@@ -7,14 +7,23 @@ import org.springframework.stereotype.Service;
 
 import com.smhrd.Mapper.NewsMapper;
 import com.smhrd.entity.NewsVO;
+import com.smhrd.entity.Pagination;
 
 @Service
 public class NewsServiceImpl implements NewsService{
 	@Autowired(required=true)
-	private NewsMapper nmapper;
+	NewsMapper nmapper;
 	
 	@Override
-	public ArrayList<NewsVO> selectNewsList()throws Exception{
-		return nmapper.selectNewsList();
+	public ArrayList<NewsVO> selectNewsList( Pagination pagination ) {
+		pagination.setTotalCount( nmapper.selectNewsListCount( pagination ) );
+		
+		return nmapper.selectNewsList( pagination );
+	}
+
+	@Override
+	public int selectNewsListCount(Pagination pagination) {
+		// TODO Auto-generated method stub
+		return nmapper.selectNewsListCount( pagination );
 	}
 }

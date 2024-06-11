@@ -85,9 +85,9 @@ form {
 }
 
 .Text-Field {
+	margin: auto;
     width: 700px;
     height: 80px;
-    gap: 4px;
 }
 
 .email{

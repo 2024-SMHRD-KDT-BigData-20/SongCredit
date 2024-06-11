@@ -12,4 +12,6 @@ public interface MemberMapper {
 
 	public Member memberFindPw(Member mvo);
 
+	public Member memberLoginWithId(String userId);
+
 }

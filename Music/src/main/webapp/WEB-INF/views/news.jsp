@@ -65,9 +65,7 @@
         </div>
         <!-- pagination (e) -->
     </div>
-    <div class="footer">
-        <div class="logo">Logo</div>
-    </div>
+    <jsp:include page="include/footer.jsp"></jsp:include>
     <script src="js/index.js"></script>
 </body>
 </html>

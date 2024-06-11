@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
   initializeHamburgerButton();
   initializeNewsList();
@@ -121,10 +119,10 @@ function initializeMainNewsList() {
     let newsTr = document.createElement("tr");
 
     newsTr.innerHTML = `
-                <td>${i}</td>
-                <td>뉴스제목 ${i}</td>
-                <td>2024-05-${i.toString().padStart(2, "0")}</td>
-            `;
+                  <td>${i}</td>
+                  <td>뉴스제목 ${i}</td>
+                  <td>2024-05-${i.toString().padStart(2, "0")}</td>
+              `;
     tbody.appendChild(newsTr);
   }
 }
@@ -144,48 +142,32 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = start; i <= end; i++) {
       let newsTr = document.createElement("tr");
       newsTr.innerHTML = `
-        <td>${i}</td>
-        <td>뉴스제목 ${i}</td>
-        <td>2024-05-${String(i).padStart(2, "0")}</td>
-      `;
+          <td>${i}</td>
+          <td>뉴스제목 ${i}</td>
+          <td>2024-05-${String(i).padStart(2, "0")}</td>
+        `;
       tbody.appendChild(newsTr);
     }
   }
-
-  // 페이징 버튼 생성 함수
-  function generatePagination() {
-    pagination.innerHTML = "";
-    for (let i = 1; i <= totalPages; i++) {
-      let pageButton = document.createElement("button");
-      pageButton.innerText = i;
-      pageButton.addEventListener("click", function () {
-        generateData(i);
-      });
-      pagination.appendChild(pageButton);
-    }
-  }
-
-  // 초기 데이터 및 페이징 생성
-  generateData(1);
-  generatePagination();
 });
 
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const domainListEl = document.querySelector("#domain-list");
   const domainInputEl = document.querySelector("#domain-txt");
-  const emailInputEl = document.querySelector(".email .input-box input[type='text']");
+  const emailInputEl = document.querySelector(
+    ".email .input-box input[type='text']"
+  );
   const fullEmailInputEl = document.querySelector("#full-email");
 
-  domainListEl.addEventListener("change", function(event) {
-      if (event.target.value !== "text") {
-          domainInputEl.value = event.target.value;
-          domainInputEl.disabled = true;
-      } else {
-          domainInputEl.value = "";
-          domainInputEl.disabled = false;
-      }
-      updateFullEmail();
+  domainListEl.addEventListener("change", function (event) {
+    if (event.target.value !== "text") {
+      domainInputEl.value = event.target.value;
+      domainInputEl.disabled = true;
+    } else {
+      domainInputEl.value = "";
+      domainInputEl.disabled = false;
+    }
+    updateFullEmail();
   });
 
   // 이메일 앞부분이 변경될 때마다 전체 이메일 주소 업데이트
@@ -194,33 +176,21 @@ document.addEventListener("DOMContentLoaded", function() {
   domainInputEl.addEventListener("input", updateFullEmail);
 
   function updateFullEmail() {
-      const emailPart = emailInputEl.value;
-      const domainPart = domainInputEl.value;
-      fullEmailInputEl.value = `${emailPart}@${domainPart}`;
+    const emailPart = emailInputEl.value;
+    const domainPart = domainInputEl.value;
+    fullEmailInputEl.value = `${emailPart}@${domainPart}`;
   }
 });
-
-
-		function showSignIn() {
-			document.querySelector('.signcontainer').style.display = 'block';
-			document.querySelector('.joincontainer').style.display = "none";
-			document.querySelector(".FindPwcontainer").style.display = 'none';
-			document.querySelector(".FindIdcontainer").style.display = 'none';
-
-		}
-		function showJoinIn() {
-			document.querySelector('.joincontainer').style.display = "block";
-			document.querySelector('.signcontainer').style.display = "none";
-			document.querySelector(".FindPwcontainer").style.display = 'none';
-			document.querySelector(".FindIdcontainer").style.display = 'none';
-		}
-		function showFindPw() {
-			document.querySelector(".FindIdcontainer").style.display = 'none';
-			document.querySelector(".FindPwcontainer").style.display = 'block';
-		}
-		function showFindId() {
-			document.querySelector('.signcontainer').style.display = "none";
-			document.querySelector('.joincontainer').style.display = "none";
-			document.querySelector(".FindIdcontainer").style.display = 'block';
-			document.querySelector(".FindPwcontainer").style.display = 'none';
-		}
+function commonAjax(url, data, type, state, callback) {
+  $.ajax({
+    url: url,
+    data: data,
+    type: type,
+  })
+    .done(function (response) {
+      callback(response);
+    })
+    .error(function (error) {
+      console.log();
+    });
+}

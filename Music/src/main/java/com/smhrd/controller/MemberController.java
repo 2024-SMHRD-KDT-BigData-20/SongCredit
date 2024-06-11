@@ -5,9 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.Mapper.MemberMapper;
 import com.smhrd.entity.Member;
@@ -17,11 +18,41 @@ import com.smhrd.entity.Member;
 public class MemberController {
 
 	@Autowired
-	private MemberMapper mmaper;
+	MemberMapper mmaper;
 
+
+	@RequestMapping("login")
+	public ModelAndView login(
+				HttpServletRequest request,
+				@RequestParam(value = "page", defaultValue = "1" ) int page,
+				HttpSession session
+			) throws Exception{
+		
+		ModelAndView mav = new ModelAndView("Login/login");
+		
+		return mav;
+	}
+	@RequestMapping("join")
+	public ModelAndView join(
+				HttpServletRequest request,
+				@RequestParam(value = "page", defaultValue = "1" ) int page,
+				HttpSession session
+			) throws Exception{
+		
+		ModelAndView mav = new ModelAndView("Login/join");
+		
+		mav.addObject("targetUrl", "join" );
+		return mav;
+	}
+	
 	// 로그인
-	@PostMapping("/Login.do")
-	public String memberLogin(Member mvo, HttpSession session) {
+	@PostMapping("/Login")
+	public String memberLogin(
+			Member mvo, 
+			HttpSession session,
+			@RequestParam( value="targetUrl", required = true) String targetUrl,
+			HttpServletRequest request
+			) {
 		Member loginMember = mmaper.memberLogin(mvo);
 
 		if (loginMember != null) {
@@ -29,11 +60,10 @@ public class MemberController {
 			System.out.println(loginMember);
 			System.out.println(session.getAttribute("loginMember"));
 			session.setMaxInactiveInterval(3600);
-			return "redirect:/mainList.do";
+			return "redirect:/" + targetUrl;
 		} else {
-			// 로그인 실패 시 처리
-			System.out.println("로그인실패");
-			return "redirect:/mainList.do";
+			request.setAttribute("errorMassage", "로그인에 실패 하였습니다.");
+			return "redirect:/" + targetUrl;
 		}
 	}
 

@@ -18,4 +18,8 @@
 	    select * from user_info where user_birth=#{user_birth} and user_email=#{user_email}
 	</select>
 	
+	<select id="memberLoginWithId" parameterType="com.smhrd.entity.Member" resultType="com.smhrd.entity.Member" >
+	    select * from user_info where user_id = #{userId }  
+	</select>
+	
 </mapper>

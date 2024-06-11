@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
 	<div class="header">
 		<a href="" class="hamburger-button"> <span></span> <span></span> <span></span>
@@ -33,7 +34,7 @@
 			</nav>
 		</div>
 		<div class="logo">
-			<a href="${cpath}/mainList.do">Logo</a>
+			<a href="${cpath}/mainList?${targetUrl }"><p>Logo</p></a>
 		</div>
 		<div class="search">
 			<img src="${cpath}/resources/img/search.png"> <input
@@ -47,8 +48,8 @@
 			<c:choose>
 				<c:when test="${empty sessionScope.loginMember}">
 					<ul>
-						<li><a href="${cpath}/member">로그인</a></li>
-						<li><a href="${cpath}/member?action=signup">회원가입</a></li>
+						<li><a href="${cpath}/login?${urlValue }">로그인</a></li>
+						<li><a href="${cpath}/join?${urlValue }">회원가입</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>

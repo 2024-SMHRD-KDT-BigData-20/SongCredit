@@ -1,5 +1,6 @@
 package com.smhrd.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,12 +74,18 @@ public class MemberController {
 
 	// 로그아웃
 	@RequestMapping("/Logout.do")
-	public String memberLogout(HttpSession session, Member vo) {
+	public String memberLogout(HttpSession session, HttpServletRequest request) {
 		Member memberSession = (Member) session.getAttribute("loginMember");
 		if (memberSession != null) {
 			session.removeAttribute("loginMember");
 		}
-		return "redirect";
+		// 현재 요청 URL 가져오기
+		String referer = request.getHeader("Referer");
+		if (referer != null && !referer.isEmpty()) {
+			return "redirect:" + referer;
+		}
+		// 기본적으로 메인 페이지로 리다이렉트
+		return "redirect:/mainList.do";
 	}
 
 }

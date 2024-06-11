@@ -39,16 +39,15 @@
 		</div>
 		<div class="mypage">
 			<c:choose>
-				<c:when test="\${empty loginMember}">
+				<c:when test="${empty sessionScope.loginMember}">
 					<ul>
 						<li><a href="javascript:void(0);" onclick="showSignIn()">로그인</a></li>
 						<li><a href="javascript:void(1);" onclick="showJoinIn()">회원가입</a></li>
 					</ul>
 				</c:when>
-
 				<c:otherwise>
 					<ul>
-						<li>\${loginMember.user_nick}님 환영합니다</li>
+						<li>${sessionScope.loginMember.user_nick}님환영합니다</li>
 						<li><a href="${cpath}/Logout.do">로그아웃</a></li>
 						<li><a href="${cpath}/sign.jsp">회원정보</a></li>
 						<li><a href="${cpath}/LikeList.do">찜목록</a></li>
@@ -61,7 +60,7 @@
 		document.querySelector(".mypage-icon").addEventListener("click",
 				function() {
 					const mypage = document.querySelector(".mypage");
-					
+
 					if (mypage.style.display === "flex") {
 						mypage.style.display = "none";
 					} else {

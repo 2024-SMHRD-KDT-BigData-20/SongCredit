@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<%@include file="include/header.jsp"%>
+	<jsp:include page="include/header.jsp" />
 	<div class="main">
 		<!-- 메인 컨테이너 -->
 		<div class="maincontainer" id="maincontainer">
@@ -40,7 +40,47 @@
 				</table>
 			</div>
 		</div>
-		<%@include file="include/Login.jsp"%>
+		<!-- 로그인 컨테이너 -->
+		<div class="signcontainer" style="display: none">
+			<div class="text-box">
+				<div>Sign In</div>
+			</div>
+			<form action="${cpath}/Login.do" method="post">
+				<div class="Text-Field">
+					<label for="">아이디</label>
+					<div class="input-box">
+						<input type="id" placeholder="아이디를 입력해주세요" class="id"
+							name="user_id">
+						<link rel="stylesheet"
+							href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+							integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+							crossorigin="anonymous" referrerpolicy="no-referrer">
+					</div>
+				</div>
+				<div class="Text-Field">
+					<label for="">비밀번호</label>
+					<div class="input-box password">
+						<input type="password" placeholder="비밀번호를 입력해주세요" class="password"
+							name="user_pw"> <span class="password-toggle-icon"><i
+							class="fas fa-eye"></i></span>
+					</div>
+				</div>
+				<div class="find">
+					<a href="javascript:void(0);" onclick="showFindId()">Forgot
+						Password?</a>
+				</div>
+
+				<div class="sep"></div>
+				<div class="link">
+					<a href="javascript:void(1);" onclick="showJoinIn()">go to the
+						Sign Up</a>
+				</div>
+				<div class="button">
+					<input type="submit" value="Sign In"></input>
+				</div>
+			</form>
+		</div>
+
 		<!-- 회원가입 컨테이너 -->
 		<div class="joincontainer" style="display: none">
 			<div class="text-box">

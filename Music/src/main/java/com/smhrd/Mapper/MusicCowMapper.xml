@@ -8,6 +8,7 @@
         	music_info
   		order by
   			upper_limit desc      
+  			limit ${(page - 1) * displayPageNum == 0 ? 0 : (page - 1) * displayPageNum }, ${displayPageNum }
     </select>
     <select id="mcListCount" resultType="Integer">
         select

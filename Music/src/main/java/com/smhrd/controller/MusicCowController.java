@@ -3,6 +3,7 @@ package com.smhrd.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,10 @@ public class MusicCowController {
 	@RequestMapping("musiccow")
 	public ModelAndView MCList(
 				HttpServletRequest request,
-				@RequestParam(value = "page", defaultValue = "1") int page
+				@RequestParam(value = "page", defaultValue = "1") int page,
+				HttpSession session
 			)throws Exception{
-		ModelAndView mav = new ModelAndView("muscicow");
+		ModelAndView mav = new ModelAndView("musiccow");
 		Pagination pagination = new Pagination();
 		pagination.setPage(page);
 		
@@ -36,11 +38,13 @@ public class MusicCowController {
 		System.out.println( pagination.getPage() );
 		System.out.println( pagination.getStartPage() );
 		System.out.println( pagination.getEndPage() );
+		System.out.println( mcList.size() );
 		System.out.println( mcList );
 		
 		mav.addObject("mcList",mcList);
 		mav.addObject("pagination",pagination);
 		mav.addObject("page",page);		
+		mav.addObject("targetUrl", "musiccow" );
 		return mav;
 	}
 	

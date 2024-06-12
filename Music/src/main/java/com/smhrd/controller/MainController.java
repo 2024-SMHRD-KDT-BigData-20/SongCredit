@@ -31,7 +31,7 @@ public class MainController {
 			) throws Exception{
 		String targetPath = "main";
 		//로그인 정보 확인
-		if ( session.getAttribute("loginId") != null  || !session.getAttribute("loginId").equals("") ) {
+		if ( session.getAttribute("loginId") != null  && !session.getAttribute("loginId").equals("") ) {
 			//로그인 아이디 정보로 회원 정보 조회
 			Member loginMember = mmaper.memberLoginWithId( String.valueOf( session.getAttribute("loginId") ) );
 			if( loginMember == null ) {
@@ -39,7 +39,7 @@ public class MainController {
 			} 
 		} else {
 			//로그인 안 했을 시 할 행동 -> 로그인 페이지로 다시 이동시킬건지, 메인 페이지에서 다시 시작 시킬건지 
-			targetPath = "login";
+			targetPath = "Login/login";
 		}
 		ModelAndView mav = new ModelAndView( targetPath ); 
 		

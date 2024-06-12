@@ -21,7 +21,7 @@ public class MemberController {
 	MemberMapper mmaper;
 
 
-	@RequestMapping("login")
+	@RequestMapping("Login/login")
 	public ModelAndView login(
 				HttpServletRequest request,
 				@RequestParam(value = "page", defaultValue = "1" ) int page,
@@ -45,27 +45,22 @@ public class MemberController {
 		return mav;
 	}
 	
-	// 로그인
-	@PostMapping("/Login")
-	public String memberLogin(
-			Member mvo, 
-			HttpSession session,
-			@RequestParam( value="targetUrl", required = true) String targetUrl,
-			HttpServletRequest request
-			) {
-		Member loginMember = mmaper.memberLogin(mvo);
-
-		if (loginMember != null) {
-			session.setAttribute("loginMember", loginMember);
-			System.out.println(loginMember);
-			System.out.println(session.getAttribute("loginMember"));
-			session.setMaxInactiveInterval(3600);
-			return "redirect:/" + targetUrl;
-		} else {
-			request.setAttribute("errorMassage", "로그인에 실패 하였습니다.");
-			return "redirect:/" + targetUrl;
-		}
-	}
+	/*
+	 * // 로그인
+	 * 
+	 * @PostMapping("/Login") public String memberLogin( Member mvo, HttpSession
+	 * session,
+	 * 
+	 * @RequestParam( value="targetUrl", required = true) String targetUrl,
+	 * HttpServletRequest request ) { Member loginMember = mmaper.memberLogin(mvo);
+	 * 
+	 * if (loginMember != null) { session.setAttribute("loginMember", loginMember);
+	 * System.out.println(loginMember);
+	 * System.out.println(session.getAttribute("loginMember"));
+	 * session.setMaxInactiveInterval(3600); return "redirect:/" + targetUrl; } else
+	 * { request.setAttribute("errorMassage", "로그인에 실패 하였습니다."); return "redirect:/"
+	 * + targetUrl; } }
+	 */
 
 	// 회원가입
 	@PostMapping("/Join.do")

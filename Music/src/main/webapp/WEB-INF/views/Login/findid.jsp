@@ -41,7 +41,7 @@
 	<jsp:include page="../include/footer.jsp" />
 	<script>
 		$(".loginFunction").on("click", function() {
-			commonAjax("${ctx }/member/rest/login", {
+			commonAjax("${cpath }/MemberRestController/login", {
 				id : $("#id").val(),
 				pass : $("#password").val()
 			}, post, 0, function callback(response) {

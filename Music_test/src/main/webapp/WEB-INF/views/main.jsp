@@ -18,9 +18,9 @@
 		<div class="maincontainer" id="maincontainer">
 			<div class="TopMusicChart">
 				<i>Top 추천곡 리스트</i>
-				<button id="prevBtn">이전</button>
+				<button id="prevBtn" class="fas fa-chevron-left"></button>
 				<div class="slider" id="gridContainer"></div>
-				<button id="nextBtn">다음</button>
+				<button id="nextBtn" class="fas fa-chevron-right"></button>
 			</div>
 			<div class="TopmusicCow">
 				<i>Top 뮤직카우 리스트</i>

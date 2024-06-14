@@ -19,13 +19,11 @@
 		</div>
 		<div class="chart-graph">
 			<div class="chart-nav">
-				<div class="price chartFn" onclick="updateChart('시세')">시세</div>
-				<div class="views chartFn" onclick="updateChart('조회수')">조회수</div>
-				<div class="like chartFn" onclick="updateChart('좋아요수')">좋아요수</div>
-				<div class="streaming chartFn" onclick="updateChart('스트리밍수')">스트리밍수</div>
-				<div class="keyword chartFn" onclick="updateChart('키워드')">키워드</div>
 				<div class="volume chartFn" onclick="updateChart('거래량')">거래량</div>
-				<div class="emotion chartFn" onclick="updateChart('감정분석')">감정분석</div>
+				<div class="like chartFn" onclick="updateChart('좋아요수')">좋아요수</div>
+				<div class="price chartFn" onclick="updateChart('가격')">가격</div>
+				<div class="wordcount chartFn" onclick="updateChart('Word Count')">Word Count</div>
+				<div class="emotion chartFn" onclick="updateCharts('감정분석')">감정분석</div>
 			</div>
 			<div class="myChart">
 				<canvas id="myChart"></canvas>
@@ -90,6 +88,8 @@
 
 			// jQuery를 사용하는 경우
 			$(musicChart).html(musiclist);
+		}
+		function updateCharts(data) {
 		}
 	</script>
 </body>

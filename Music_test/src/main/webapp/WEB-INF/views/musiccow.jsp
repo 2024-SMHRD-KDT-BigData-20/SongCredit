@@ -14,6 +14,9 @@
 <body>
 	<jsp:include page="include/header.jsp" />
 	<div class="main">
+		<div>
+			<input type="button">
+		</div>
 		<table class="newsMainlist">
 			<thead>
 				<tr>
@@ -26,6 +29,9 @@
 			</thead>
 			<tbody class="newtbody">
 				<c:forEach var="item" items="${mcList}">
+					<div>
+						<input type="checkbox">
+					</div>
 					<tr>
 						<td>썸네일</td>
 						<td>${item.music_title}</td>
@@ -38,13 +44,11 @@
 		</table>
 		<div class="pagination">
 			<c:if test="${pagination.page != 1}">
-				<a href="${cpath}/musiccow?searchText=${searchText}&page=1">first
-					page<i class="far fa-chevron-double-left"></i>
-				</a>
+				<a href="${cpath}/musiccow?searchText=${searchText}&page=1"><i
+					class="fas fa-chevron-double-left"></i> </a>
 				<a
-					href="${cpath}/musiccow?searchText=${searchText}&page=${pagination.page - 1}">before
-					page<i class="far fa-chevron-left"></i>
-				</a>
+					href="${cpath}/musiccow?searchText=${searchText}&page=${pagination.page - 1}"><i
+					class="fas fa-chevron-left"></i> </a>
 			</c:if>
 			<c:forEach begin="${pagination.startPage}"
 				end="${pagination.endPage}" var="num">
@@ -59,19 +63,15 @@
 			</c:forEach>
 			<c:if test="${pagination.page != pagination.tempEndPage }">
 				<a
-					href="${cpath}/musiccow?searchText=${searchText}&page=${pagination.page + 1}">next
-					page<i class="far fa-chevron-right"></i>
-				</a>
+					href="${cpath}/musiccow?searchText=${searchText}&page=${pagination.page + 1}"><i
+					class="fas fa-chevron-right"></i> </a>
 				<a
-					href="${cpath}/musiccow?searchText=${searchText}&page=${pagination.endPage}">final
-					page<i class="far fa-chevron-double-right"></i>
-				</a>
+					href="${cpath}/musiccow?searchText=${searchText}&page=${pagination.endPage}"><i
+					class="fas fa-chevron-double-right"></i> </a>
 			</c:if>
 		</div>
-		<script>
-			
-		</script>
-		<jsp:include page="include/footer.jsp" />
-		<script src="${cpath }/resources/js/index.js"></script>
+	</div>
+	<jsp:include page="include/footer.jsp" />
+	<script src="${cpath }/resources/js/index.js"></script>
 </body>
 </html>

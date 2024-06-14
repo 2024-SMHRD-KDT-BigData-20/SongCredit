@@ -40,7 +40,7 @@
 	</div>
 	<script>
 		$(".loginFunction").on("click", function() {
-			commonAjax("${ctx }/member/rest/login", {
+			commonAjax("${cpath }/rest/member/login", {
 				id : $("#id").val(),
 				pass : $("#password").val()
 			}, post, 0, function callback(response) {
@@ -48,7 +48,7 @@
 
 				alert("로그인에 " + resultText + " 하셨습니다.");
 				if (response.resultCode == 0) {
-					location.href = "${ctx }" + response.resultUrl;
+					location.href = "${cpath }" + response.resultUrl;
 				} else {
 					location.reload();
 				}

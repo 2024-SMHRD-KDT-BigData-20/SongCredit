@@ -89,8 +89,30 @@
 			// jQuery를 사용하는 경우
 			$(musicChart).html(musiclist);
 		}
-		function updateCharts(data) {
+		function updateCharts(data) {// Fetch API를 사용하여 Flask 서버에 데이터 전송
+	            fetch('http://localhost:5000/song', {
+	                method: 'POST',
+	                headers: {
+	                    'Content-Type': 'application/json'
+	                },
+	                body: JSON.stringify({ title: songTitle })
+	            })
+	            .then(response => response.json())
+	            .then(data => {
+	                // 서버로부터 받은 추천 결과를 HTML 요소에 표시
+	                document.getElementById('recommendation-result').innerText = '추천 결과: ' + data.recommendation;
+	            })
+	            .catch(error => console.error('Error:', error));
 		}
-	</script>
+			
+		</script>
+		<h1>Music List</h1>
+	    <ul>
+	        <!-- 사용자가 음악 제목을 클릭할 때 sendSongTitle 함수 호출 -->
+	        <li><a href="#" onclick="sendSongTitle('Song 1')">Song 1</a></li>
+	        <li><a href="#" onclick="sendSongTitle('Song 2')">Song 2</a></li>
+	        <li><a href="#" onclick="sendSongTitle('Song 3')">Song 3</a></li>
+	    </ul>
+	    <h2 id="recommendation-result"></h2>
 </body>
 </html>

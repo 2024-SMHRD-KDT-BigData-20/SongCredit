@@ -90,6 +90,7 @@
 			$(musicChart).html(musiclist);
 		}
 		function updateCharts(data) {
+			
 		}
 	</script>
 </body>

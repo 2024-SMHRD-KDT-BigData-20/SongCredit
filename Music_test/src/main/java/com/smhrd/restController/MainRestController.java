@@ -32,4 +32,14 @@ public class MainRestController {
 		List<Chart> list = cmapper.chartList();
 		return list;
 	}
+	@GetMapping("/topmusiccow")
+	public List<Chart> uppermusiccow() {
+	    return cmapper.getupper();
+	}
+
+	@GetMapping("/undermusiccow")
+	public List<Chart> undermusiccow() {
+	    return cmapper.getunder();
+	}
+
 }

@@ -1,1 +1,1 @@
-select * from music_info;
+select * from news_info_test

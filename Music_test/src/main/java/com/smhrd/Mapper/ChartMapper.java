@@ -12,5 +12,8 @@ public interface ChartMapper {
     List<Chart> chartList();
 
 	Chart getChartById( int idx );
+
+	List<Chart> getupper();
+	List<Chart> getunder();
     
 }

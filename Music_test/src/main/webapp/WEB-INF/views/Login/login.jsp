@@ -44,7 +44,7 @@
 							<a href="${cpath }/join">Sign Up</a>
 						</div>
 					</div>
-					<div class="sep"></div>
+					<div class="sepa"></div>
 					<div class="button">
 						<input type="button" class="loginFunction" value="Sign In"></input>
 					</div>

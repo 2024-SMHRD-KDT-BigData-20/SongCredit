@@ -2,10 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.Mapper.ChartMapper">
     <select id="chartList" resultType="com.smhrd.entity.Chart">
-        SELECT * FROM chart_info
+        SELECT * FROM music_info_test
     </select>
 
     <select id="getChartById" parameterType="int" resultType="com.smhrd.entity.Chart">
-        select * from chart_info where chart_indx = #{chart_indx}
+        select * from music_info_test where music_idx = #{music_idx}
+    </select>
+
+    <select id="getupper" resultType="com.smhrd.entity.Chart">
+        select * from music_info_test order by upper_limit DESC Limit 0,10
+    </select>
+
+    <select id="getunder" resultType="com.smhrd.entity.Chart">
+        select * from music_info_test order by under_limit ASC Limit 0,10
     </select>
 </mapper>

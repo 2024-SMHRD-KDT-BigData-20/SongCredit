@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.Mapper.NewsMapper">
     <select id="topNewsList" resultType="com.smhrd.entity.NewsVO">
-    	select * from news_info order by pressed_at 
+    	select * from news_info_test order by pressed_at 
     </select>
         <select id="selectNewsList" resultType="com.smhrd.entity.NewsVO">
         select 
         	* 
         from 
-        	news_info 
+        	news_info_test
         limit ${(page - 1) * displayPageNum == 0 ? 0 : (page - 1) * displayPageNum }, ${displayPageNum }
     </select>
     
@@ -16,7 +16,7 @@
         select 
         	count( * )
         from 
-        	news_info 
+        	news_info_test
     </select>    
         
 </mapper>

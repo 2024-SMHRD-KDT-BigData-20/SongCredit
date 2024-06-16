@@ -1,10 +1,15 @@
 package com.smhrd.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.entity.Chart;
 import com.smhrd.Mapper.ChartMapper;
@@ -12,16 +17,16 @@ import com.smhrd.Mapper.ChartMapper;
 @Controller
 public class ChartController {
 
-    @Autowired
-    ChartMapper cmapper;
+	@Autowired
+	ChartMapper cmapper;
+	
+	@RequestMapping("chartDetail")
+	public ModelAndView chartDetail(@RequestParam(value = "targetUrl", required = false, defaultValue = "") String targetUrl,
+			HttpServletRequest request, HttpSession session) throws Exception {
 
-    @GetMapping("/chartDetail")
-    public String chartDetail(
-    		@RequestParam("chart_indx") int chartIndx, 
-    		Model model
-    	) {
-        Chart chart = cmapper.getChartById(chartIndx);
-        model.addAttribute("chart", chart);
-        return "chartDetail";
-    }
+		ModelAndView mav = new ModelAndView("chartDetail");
+		mav.addObject("targetUrl", "chartDetail");
+
+		return mav;
+	}
 }

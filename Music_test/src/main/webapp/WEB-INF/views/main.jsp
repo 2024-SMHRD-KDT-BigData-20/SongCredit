@@ -17,21 +17,55 @@
 		<!-- 메인 컨테이너 -->
 		<div class="maincontainer" id="maincontainer">
 			<div class="TopMusicChart">
-				<i>Top 추천곡 리스트</i>
-				<button id="prevBtn" class="fas fa-chevron-left"></button>
-				<div class="slider" id="gridContainer"></div>
-				<button id="nextBtn" class="fas fa-chevron-right"></button>
+				<h3>Top 추천곡 리스트</h3>
+				<div class="slider-container">
+					<button id="prevBtn" class="slider-button">＜</button>
+					<div class="slider" id="gridContainer"></div>
+					<button id="nextBtn" class="slider-button">＞</button>
+				</div>
 			</div>
+			<div class="sep"></div>
+			<h3>Top 뮤직카우 리스트</h3>
 			<div class="TopmusicCow">
-				<i>Top 뮤직카우 리스트</i>
-
-			</div>
-			<div class="topnewsList">
-				<i>뉴스 정보 리스트</i>
 				<table>
 					<thead>
 						<tr>
-							<th>뉴스목록</th>
+							<th colspan="5">상한가</th>
+						</tr>
+						<tr>
+							<td>제목</td>
+							<td>가수</td>
+							<td>상한가</td>
+							<td>하양가</td>
+							<td>전일비</td>
+						</tr>
+					</thead>
+					<tbody class="musiccowupper" id="musiccowupper"></tbody>
+				</table>
+				<table>
+					<thead>
+						<tr>
+							<th colspan="5">하한가</th>
+						</tr>
+						<tr>
+							<td colspan="1">제목</td>
+							<td>가수</td>
+							<td>상한가</td>
+							<td>하양가</td>
+							<td>전일비</td>
+						</tr>
+					</thead>
+					<tbody class="musiccower" id="musiccowunder"></tbody>
+				</table>
+			</div>
+
+			<div class="sep"></div>
+			<div class="topnewsList">
+				<h3>뉴스 정보 리스트</h3>
+				<table>
+					<thead>
+						<tr>
+							<th colspan="2">뉴스목록</th>
 						</tr>
 						<tr>
 							<!-- <td>썸네일</td> -->
@@ -66,10 +100,13 @@
 		function fetchAllData() {
 			console.log("Fetching all data");
 			$.when(a("${cpath}/chart", "json", "get"),
-					a("${cpath}/topnewsList", "json", "get")).done(
-					function(chartData, newsData) {
+					a("${cpath}/topnewsList", "json", "get"),
+					a("${cpath}/topmusiccow", "json", "get"),
+					a("${cpath}/undermusiccow", "json", "get")).done(
+					function(chartData, newsData, upperData, underData) {
 						console.log("Data fetched successfully");
-						callback(chartData[0], newsData[0]);
+						callback(chartData[0], newsData[0], upperData[0],
+								underData[0]);
 					}).fail(function() {
 				alert("데이터를 가져오는데 실패했습니다.");
 				console.error("Failed to fetch data");
@@ -84,9 +121,11 @@
 			});
 		}
 
-		function callback(chartData, newsData) {
+		function callback(chartData, newsData, upperData, underData) {
 			updateChartList(chartData);
 			updatenewsList(newsData);
+			updateMusicCowList(upperData, 'musiccowupper');
+			updateMusicCowList(underData, 'musiccowunder');
 		}
 
 		function updateChartList(chartData) {
@@ -99,13 +138,14 @@
 							function(index, item) {
 								bList += "<div class='cList'>";
 								bList += "<a href='" + "${cpath}"
-										+ "/chartDetail.do?chart_indx="
-										+ item.chart_indx + "'>";
-								bList += "<img src='" + "${cpath}" + "/resources/img/img" + item.music_idx + ".jpg' alt='" + item.music_name + "'>";
-								bList += "<h4>" + item.music_name + "</h4>";
-								bList += "<h5>" + item.music_singer + "</h5>";
-								bList += "<p>판매량: " + item.chart_sl + "</p>";
-								bList += "<p>현재가: " + item.chart_now + "</p>";
+										+ "/chartDetail?music_idx="
+										+ item.music_idx + "'>";
+								bList += "<img src='" + item.album_img + "' width='100px' height='100px'>";
+								bList += "<h4>" + item.music_title + "</h4>";
+								bList += "<h5>" + item.artist + "</h5>";
+								bList += "<h5>" + item.music_genre + "</h5>";
+								bList += "<p>판매량: " + item.upper_limit + "</p>";
+								bList += "<p>현재가: " + item.under_limit + "</p>";
 								bList += "</a>";
 								bList += "</div>";
 							});
@@ -124,6 +164,21 @@
 				newsTable += "</tr>";
 			});
 			topnewslist.html(newsTable);
+		}
+
+		function updateMusicCowList(data, elementId) {
+			let element = $('#' + elementId);
+			let content = '';
+			$.each(data, function(index, item) {
+				content += "<tr>";
+				content += "<td>" + item.music_title + "</td>";
+				content += "<td>" + item.artist + "</td>";
+				content += "<td>" + item.upper_limit + "</td>";
+				content += "<td>" + item.under_limit + "</td>";
+				content += "<td>" + item.net_change + "</td>";
+				content += "</tr>";
+			});
+			element.html(content);
 		}
 
 		function slide(direction) {

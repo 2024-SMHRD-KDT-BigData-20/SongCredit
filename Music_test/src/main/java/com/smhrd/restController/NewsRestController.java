@@ -11,5 +11,14 @@ import com.smhrd.entity.NewsVO;
 
 @RestController
 public class NewsRestController {
+
+
+	@Autowired
+	NewsMapper nmapper;
 	
+	@GetMapping("/initaliznews")
+	public List<NewsVO> NewsList() {
+		List<NewsVO> list = nmapper.initalizenews();
+		return list;
+	}
 }

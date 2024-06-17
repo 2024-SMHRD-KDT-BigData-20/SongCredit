@@ -10,4 +10,5 @@ public interface NewsMapper {
 	List<NewsVO> topNewsList();
 	ArrayList<NewsVO> selectNewsList( Pagination pagination );
 	int selectNewsListCount( Pagination pagination );
+	List<NewsVO> initalizenews();
 }

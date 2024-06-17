@@ -25,14 +25,12 @@ public class ChartController {
 	@Autowired
 	ChartMapper cmapper;
 
-	@RequestMapping("chartDetail")
-	public ModelAndView chartDetail(
-			@RequestParam(value = "targetUrl", required = false, defaultValue = "") String targetUrl,
-			HttpServletRequest request, HttpSession session) throws Exception {
-
+	@RequestMapping("/chartDetail")
+	public ModelAndView chartDetail(@RequestParam(value = "item", required = false, defaultValue = "0") int music_idx)
+			throws Exception {
+		System.out.println("Received music_idx: " + music_idx);
 		ModelAndView mav = new ModelAndView("chartDetail");
-		mav.addObject("targetUrl", "chartDetail");
-
+		mav.addObject("music_idx", music_idx);
 		return mav;
 	}
 

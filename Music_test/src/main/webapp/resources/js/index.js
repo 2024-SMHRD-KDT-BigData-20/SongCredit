@@ -1,41 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   initializeHamburgerButton();
-  initializeNewsList();
   initializeMusicList();
   initializePasswordFieldToggle();
   initializeMainNewsList();
 });
 
-function initializeNewsList() {
-  let newslist = document.querySelector(".newslist");
-
-  // 테이블 헤더 행 생성
-  let headerRow = document.createElement("tr");
-  let relatedtitleNews = document.createElement("th");
-
-  relatedtitleNews.textContent = "관련 뉴스";
-  relatedtitleNews.colSpan = 3;
-
-  headerRow.appendChild(relatedtitleNews);
-  newslist.appendChild(headerRow);
-
-  for (let i = 1; i <= 10; i++) {
-    let newstr = document.createElement("tr");
-    let newsidx = document.createElement("td");
-    let newstitle = document.createElement("td");
-    let newsdate = document.createElement("td");
-
-    newsidx.textContent = i;
-    newstitle.textContent = "뉴스 제목 " + i; // 각 뉴스 제목에 숫자를 추가
-    newsdate.textContent = "2024-05-" + i.toString().padStart(2, "0"); // 날짜 형식을 조정
-
-    newstr.appendChild(newsidx);
-    newstr.appendChild(newstitle);
-    newstr.appendChild(newsdate);
-
-    newslist.appendChild(newstr);
-  }
-}
 
 function initializeMusicList() {
   let musiclist = document.querySelector(".musiclist");

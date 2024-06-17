@@ -15,5 +15,7 @@ public interface ChartMapper {
 
 	List<Chart> getupper();
 	List<Chart> getunder();
+
+	List<Chart> getChartById();
     
 }

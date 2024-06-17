@@ -136,8 +136,7 @@
 							chartData,
 							function(index, item) {
 								bList += "<div class='cList'>";
-								bList += "<a href='" + "${cpath}"
-										+ "/chartDetail?music_idx="
+								bList += "<a href='" + "${cpath}/chartDetail?item="
 										+ item.music_idx + "'>";
 								bList += "<img src='" + item.album_img + "' width='100px' height='100px'>";
 								bList += "<h4>" + item.music_title + "</h4>";

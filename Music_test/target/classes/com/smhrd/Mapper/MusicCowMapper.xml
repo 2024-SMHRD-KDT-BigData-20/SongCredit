@@ -5,7 +5,7 @@
         select
         	*
         from 
-        	music_info
+        	music_info_test
   		order by
   			upper_limit desc      
   			limit ${(page - 1) * displayPageNum == 0 ? 0 : (page - 1) * displayPageNum }, ${displayPageNum }
@@ -14,6 +14,6 @@
         select
         	count(*)
         from
-        	music_info
+        	music_info_test
     </select>
 </mapper>

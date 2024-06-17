@@ -1,5 +1,7 @@
 package com.smhrd.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.entity.Chart;
+import com.smhrd.entity.Musiccow;
+import com.smhrd.entity.Pagination;
+import com.smhrd.service.MusicCowServiceImpl;
 import com.smhrd.Mapper.ChartMapper;
 
 @Controller
@@ -19,14 +24,34 @@ public class ChartController {
 
 	@Autowired
 	ChartMapper cmapper;
-	
+
 	@RequestMapping("chartDetail")
-	public ModelAndView chartDetail(@RequestParam(value = "targetUrl", required = false, defaultValue = "") String targetUrl,
+	public ModelAndView chartDetail(
+			@RequestParam(value = "targetUrl", required = false, defaultValue = "") String targetUrl,
 			HttpServletRequest request, HttpSession session) throws Exception {
 
 		ModelAndView mav = new ModelAndView("chartDetail");
 		mav.addObject("targetUrl", "chartDetail");
 
+		return mav;
+	}
+
+	@Autowired
+	MusicCowServiceImpl MusiccowService;
+
+	@RequestMapping("chartList")
+	public ModelAndView MCList(HttpServletRequest request, @RequestParam(value = "page", defaultValue = "1") int page,
+			HttpSession session) throws Exception {
+		ModelAndView mav = new ModelAndView("chartList");
+		Pagination pagination = new Pagination();
+		pagination.setPage(page);
+
+		ArrayList<Musiccow> mcList = MusiccowService.getMcList(pagination);
+
+		mav.addObject("mcList", mcList);
+		mav.addObject("pagination", pagination);
+		mav.addObject("page", page);
+		mav.addObject("targetUrl", "chartList");
 		return mav;
 	}
 }

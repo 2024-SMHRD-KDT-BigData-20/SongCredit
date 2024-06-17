@@ -204,7 +204,7 @@ function removemember() {
     let removeModal = document.querySelector(".removeModal");
     let modalBackground = document.querySelector(".modal-background");
     	removebutton.addEventListener("click", function () {
-    		removeModal.style.display = "block";
+    		removeModal.style.display = "flex";
     		modalBackground.style.display = "block";
     	});
     	

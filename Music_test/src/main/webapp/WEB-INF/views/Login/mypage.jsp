@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>음악추천정보시스템</title>
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 </style>
@@ -89,18 +88,17 @@
 			</form>
 		</div>
 	</div>
-	<!-- 모달 배경 -->
 	<div class="modal-background"></div>
 
-	<!-- 모달 창 -->
 	<div class="removeModal">
 		<span>X</span>
 		<h2>회원 탈퇴 하기</h2>
-		<p>	탈퇴 하기 클릭시<br>
-			개인 정보 및 계정에 대한 모든 정보가 사라지며,<br> 
-			더 이상 로그인 필수 서비스를 이용할 수 없습니다. <br>
-			탈퇴하시겠습니까?
-			</p>
+		<div class="ptag">
+			<p>탈퇴 하기 클릭시</p>
+			<p>개인 정보 및 계정에 대한 모든 정보가 사라지며,</p>
+			<p>더 이상 로그인 필수 서비스를 이용할 수 없습니다.</p>
+			<p>탈퇴하시겠습니까?</p>
+		</div>
 		<div class="button">
 			<input type="button" value="회원탈퇴">
 		</div>

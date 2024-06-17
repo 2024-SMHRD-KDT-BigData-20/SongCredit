@@ -8,17 +8,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>음악추천정보시스템</title>
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<jsp:include page="include/header.jsp" />
 	<div class="main">
 		<div class="maincontainer">
+			<h3>음악 차트</h3>
 			<div class="chartListcontainer">
-				<div>
-					<input type="button">
-				</div>
 				<table class="chartListMainlist">
 					<thead>
 						<tr>

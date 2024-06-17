@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사용자 관리</title>
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -16,7 +15,7 @@
 	<!-- 회원가입 컨테이너 -->
 	<div class="joincontainer">
 		<div class="text-box">
-			<div>Sign Up</div>
+			<div>Join</div>
 		</div>
 		<form id="joinForm">
 			<div class="Text-Field">

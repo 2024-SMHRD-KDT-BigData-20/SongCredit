@@ -801,3 +801,12 @@ input {
 	margin: 10px 0 10px 0;
 	border: 1px solid rgba(221, 225, 230, 1)
 }
+.newtbody tr {
+    transition: background-color 0.3s ease;
+}
+
+/* 마우스 오버 시 스타일 */
+.newtbody tr:hover {
+    cursor: pointer; /* 커서를 포인터로 변경 */
+    background-color: #f1f1f1; /* 배경색 변경 */
+}

@@ -29,11 +29,9 @@
 			</thead>
 			<tbody class="newtbody">
 				<c:forEach var="item" items="${mcList}">
-					<div>
-						<input type="checkbox">
-					</div>
 					<tr>
-						<td>썸네일</td>
+						<td><input type="checkbox"></td>
+						<td><img src="${item.album_img }"></td>
 						<td>${item.music_title}</td>
 						<td>${item.artist}</td>
 						<td>${item.upper_limit}</td>

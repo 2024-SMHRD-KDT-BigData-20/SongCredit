@@ -27,7 +27,7 @@
 			</thead>
 			<tbody class="newtbody">
 				<c:forEach var="item" items="${mcList}">
-					<tr>
+					<tr data-href="${cpath}/chartDetail?item=${item.music_title}">
 						<td><input type="checkbox"></td>
 						<td><img src="${item.album_img }"></td>
 						<td>${item.music_title}</td>
@@ -66,6 +66,22 @@
 		</div>
 	</div>
 	<jsp:include page="include/footer.jsp" />
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const rows = document.querySelectorAll('.newtbody tr');
+
+		rows.forEach(row => {
+			row.addEventListener('click', function() {
+				// 행 클릭 시 data-href 속성 값을 가져와서 이동
+				const href = this.getAttribute('data-href');
+				if (href) {
+					window.location.href = href;
+				}
+			});
+		});
+	});
+
+	</script>
 	<script src="${cpath }/resources/js/index.js"></script>
 </body>
 </html>

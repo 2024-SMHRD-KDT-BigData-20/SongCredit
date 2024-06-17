@@ -26,14 +26,12 @@ public class ChartController {
 	ChartMapper cmapper;
 
 	@RequestMapping("/chartDetail")
-	public ModelAndView chartDetail(@RequestParam(value = "item", required = false, defaultValue = "0") int music_idx)
-			throws Exception {
-		System.out.println("Received music_idx: " + music_idx);
-		ModelAndView mav = new ModelAndView("chartDetail");
-		mav.addObject("music_idx", music_idx);
-		return mav;
+	public ModelAndView chartDetail(@RequestParam(value = "item", required = false, defaultValue = "0") int music_idx) throws Exception {
+	    System.out.println("Received music_idx: " + music_idx);
+	    ModelAndView mav = new ModelAndView("chartDetail");
+	    mav.addObject("music_idx", music_idx);
+	    return mav;
 	}
-
 	@Autowired
 	MusicCowServiceImpl MusiccowService;
 

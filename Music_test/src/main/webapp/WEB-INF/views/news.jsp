@@ -45,7 +45,6 @@
 			</tbody>
 		</table>
 
-		<!-- pagination (s) -->
 		<div class="pagination">
 			<c:if test="${pagination.page != 1}">
 				<a href="${cpath}/news?searchText=${searchText}&page=1">first
@@ -78,7 +77,6 @@
 				</a>
 			</c:if>
 		</div>
-		<!-- pagination (e) -->
 	</div>
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<script src="${cpath }/resources/js/index.js"></script>

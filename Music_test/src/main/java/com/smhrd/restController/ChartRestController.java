@@ -15,8 +15,8 @@ public class ChartRestController {
 	@Autowired
     private ChartMapper cmapper;
 
-    @GetMapping("/getChart")
-    public Chart ChartList(@RequestParam int music_idx) {
+	@GetMapping("/getChart")
+	public Chart getChart(@RequestParam int music_idx) {
         Chart chart = cmapper.getChartById(music_idx);
         return chart;
     }

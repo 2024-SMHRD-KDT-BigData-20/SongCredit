@@ -128,27 +128,23 @@
 		}
 
 		function updateChartList(chartData) {
-			const container = $('#gridContainer');
-			let bList = '';
+		    const container = $('#gridContainer');
+		    let bList = '';
 
-			$
-					.each(
-							chartData,
-							function(index, item) {
-								bList += "<div class='cList'>";
-								bList += "<a href='" + "${cpath}/chartDetail?item="
-										+ item.music_idx + "'>";
-								bList += "<img src='" + item.album_img + "' width='100px' height='100px'>";
-								bList += "<h4>" + item.music_title + "</h4>";
-								bList += "<h5>" + item.artist + "</h5>";
-								bList += "<h5>" + item.music_genre + "</h5>";
-								bList += "<p>판매량: " + item.upper_limit + "</p>";
-								bList += "<p>현재가: " + item.under_limit + "</p>";
-								bList += "</a>";
-								bList += "</div>";
-							});
-			container.html(bList);
-			updateSlider();
+		    $.each(chartData, function(index, item) {
+		        bList += "<div class='cList'>";
+		        bList += "<a href='" + "${cpath}/chartDetail?music_idx=" + item.music_idx + "'>";
+		        bList += "<img src='" + item.album_img + "' width='100px' height='100px'>";
+		        bList += "<h4>" + item.music_title + "</h4>";
+		        bList += "<h5>" + item.artist + "</h5>";
+		        bList += "<h5>" + item.music_genre + "</h5>";
+		        bList += "<p>판매량: " + item.upper_limit + "</p>";
+		        bList += "<p>현재가: " + item.under_limit + "</p>";
+		        bList += "</a>";
+		        bList += "</div>";
+		    });
+		    container.html(bList);
+		    updateSlider();
 		}
 
 		function updatenewsList(newsData) {

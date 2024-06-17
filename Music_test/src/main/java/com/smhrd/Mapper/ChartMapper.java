@@ -11,11 +11,10 @@ import com.smhrd.entity.Chart;
 public interface ChartMapper {
     List<Chart> chartList();
 
-	Chart getChartById( int idx );
+    Chart getChartById(@Param("music_idx") int music_idx);
 
 	List<Chart> getupper();
 	List<Chart> getunder();
 
-	List<Chart> getChartById();
     
 }

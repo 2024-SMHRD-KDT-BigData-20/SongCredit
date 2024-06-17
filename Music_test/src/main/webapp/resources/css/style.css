@@ -1,10 +1,9 @@
+
 @font-face {
-	font-family: '양진체';
-	src:
-		url('https://fastly.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
@@ -1575,7 +1574,7 @@ input {
 	display: flex; /* flexbox 사용하여 자식 요소를 옆으로 나란히 배치 */
 	justify-content: space-around; /* 자식 요소 간의 여백을 균등하게 배치 */
 	overflow: hidden;
-	font-family: "BMJUA";
+	font-family: "KCC-Hanbit";
 }
 
 .TopmusicCow table {

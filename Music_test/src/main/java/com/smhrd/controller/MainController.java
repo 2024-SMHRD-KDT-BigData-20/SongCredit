@@ -20,8 +20,11 @@ public class MainController {
 	MemberMapper mmaper;
 
 	@RequestMapping("main")
-	public ModelAndView main(@RequestParam(value = "targetUrl", required = false, defaultValue = "") String targetUrl,
-			HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView main(@RequestParam(value = "targetUrl",
+	required = false,
+	defaultValue = "") String targetUrl,
+			HttpServletRequest request,
+			HttpSession session) throws Exception {
 
 		ModelAndView mav = new ModelAndView("main");
 		mav.addObject("targetUrl", "main");

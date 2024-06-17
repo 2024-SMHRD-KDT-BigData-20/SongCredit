@@ -1,3 +1,39 @@
+@font-face {
+	font-family: '양진체';
+	src:
+		url('https://fastly.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SBAggroB';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'WAGURITTF';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403@1.0/WAGURITTF.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -257,6 +293,7 @@ input {
 	border-radius: 15px;
 }
 
+/* 기존 CSS 유지 */
 .mypage-icon {
 	position: absolute;
 	right: 50px;
@@ -276,10 +313,11 @@ input {
 	overflow: hidden;
 }
 
+/* 트랜지션을 추가한 CSS */
 .mypage {
 	width: 200px;
 	height: 100px;
-	display: none;
+	display: none; /* 처음에 숨겨둠 */
 	position: absolute;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -288,7 +326,15 @@ input {
 	background-color: white;
 	border: 1px solid #ccc;
 	padding: 10px;
+	opacity: 0; /* 처음에는 투명하게 */
+	transition: 0.4s ease-in-out, display 0.4s step-end; /* 트랜지션 추가 */
 }
+
+.mypage.show {
+	display: flex; /* 표시할 때는 flex로 */
+	opacity: 1; /* 불투명하게 */
+}
+
 
 .chart-music {
 	display: flex;
@@ -476,16 +522,16 @@ input {
 }
 
 @keyframes fadeInLeft {
-	0% 
-	{
-	opacity: 0;
-	transform: translateX(-25%);
-	}
-	100%
-	{
-	opacity:1;
-	transform:translateX(0);}
-	}
+    0% {
+        opacity: 0;
+        transform: translateX(-25%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 .overlay.visible li {
 	animation: fadeInLeft 0.3s ease forwards;
 }
@@ -541,9 +587,8 @@ input {
 
 /* 슬라이더 버튼 스타일 */
 .slider-button {
-	background-color: rgba(0, 0, 0, 0.5);
 	border: none;
-	color: white;
+	color: black;
 	cursor: pointer;
 	padding: 10px;
 	position: absolute;
@@ -551,6 +596,7 @@ input {
 	transform: translateY(-50%);
 	z-index: 10;
 	font-size: 24px;
+	background: none;
 }
 
 #prevBtn {
@@ -563,14 +609,18 @@ input {
 
 /* 슬라이더 아이템 스타일 */
 .cList {
-	flex: 0 0 calc(33.333% - 20px); /* 한 줄에 3개가 오도록 너비 설정 (간격 포함) */
+	height: 480px;
+	border-radius: 80px;
+	flex: 0 0 calc(33.333% - 20px);
+	/* 한 줄에 3개가 오도록 너비 설정 (간격 포함) */
 	box-sizing: border-box;
 	border: 1px solid #ccc;
 	padding: 10px;
 	margin: 10px;
 	text-align: center;
-	background-color: #f8f8f8; /* 배경색 추가 */
-	transition: transform 0.3s ease; /* 호버 시 애니메이션 효과 */
+	background-color: #B4E5FF; /* 배경색 추가 */
+	transition: transform 0.3s ease;
+	flex: 0 0 calc(33.333% - 20px); /* 호버 시 애니메이션 효과 */
 }
 
 .cList:hover {
@@ -579,10 +629,13 @@ input {
 
 /* 이미지 스타일 */
 .cList img {
-	width: 100%;
-	height: auto;
+	width: 280px;
+	height: 280px;
+	overflow: hidden;
 	display: block;
 	margin: 0 auto 10px; /* 가운데 정렬 및 하단 여백 */
+	border-radius: 50%;
+	object-fit: fill;
 }
 
 /* 텍스트 스타일 */
@@ -613,17 +666,20 @@ input {
 	margin: 20px 0;
 	font-size: 1em;
 	font-family: Arial, sans-serif;
+	font-size: 1em;
+	border-radius: 40px;
 }
 
 .topnewsList thead tr th {
+	width: 60%;
 	background-color: #f2f2f2;
 	color: #333;
-	text-align: left;
+	text-align: center;
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 }
 
-.topnewsList > table > thead > tr:nth-child(2) td{
+.topnewsList>table>thead>tr:nth-child(2) td {
 	padding: 10px;
 	text-align: center;
 	padding: 10px;
@@ -646,57 +702,65 @@ input {
 	padding: 10px;
 	text-align: left;
 }
+
+.topnewsList tbody td:nth-child(2) {
+	padding: 10px;
+	text-align: center;
+}
 /* 기존 스타일 유지하면서 Top 뮤직카우 리스트 스타일 추가 */
 .TopmusicCow {
-    margin-top: 20px;
-    display: flex; /* flexbox 사용하여 자식 요소를 옆으로 나란히 배치 */
-    justify-content: space-between; /* 자식 요소 간의 여백을 균등하게 배치 */
+	margin-top: 20px;
+	display: flex; /* flexbox 사용하여 자식 요소를 옆으로 나란히 배치 */
+	justify-content: space-around; /* 자식 요소 간의 여백을 균등하게 배치 */
+	overflow: hidden;
 }
 
 .TopmusicCow table {
-    width: 20%;
-    border-collapse: collapse;
-    font-size: 1em;
-    font-family: Arial, sans-serif;
+	margin: 10px;
+	width: 90%;
+	border-collapse: collapse;
+	font-size: 1rem;
+	border-radius: 40px;
+	width: 90%;
 }
 
 .TopmusicCow thead tr th {
-    background-color: #f2f2f2;
-    color: #333;
-    text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+	background-color: #f2f2f2;
+	color: #333;
+	text-align: center;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
 }
 
-.TopmusicCow > table > thead > tr:nth-child(2) td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+.TopmusicCow  table  td {
+	border: 1px solid #ddd;
+}
+
+.TopmusicCow>table>thead>tr:nth-child(2) td {
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	white-space: nowrap;
 }
 
 .TopmusicCow tbody tr {
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
+	border-bottom: 1px solid #ddd;
 }
 
 .TopmusicCow tbody tr:nth-of-type(even) {
-    background-color: #f9f9f9;
+	background-color: #f9f9f9;
 }
 
 .TopmusicCow tbody tr:hover {
-    background-color: #f1f1f1;
+	background-color: #f1f1f1;
 }
 
 .TopmusicCow tbody td {
-    padding: 10px;
-    text-align: left;
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	width: auto;
+	padding: 10px;
+	text-align: left;
+	overflow: hidden;
 }
-
 
 .removeModal {
 	display: none;
@@ -724,12 +788,12 @@ input {
 	z-index: 999;
 }
 
-.maincontainer h3{
+.maincontainer h3 {
 	padding: 20px;
 	font-size: 1.3rem;
-	text-align: left
+	text-align: left;
+	font-family: "yg-jalnan";
 }
-
 
 .sep {
 	width: 1060px;

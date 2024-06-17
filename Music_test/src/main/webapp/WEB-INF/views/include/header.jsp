@@ -38,7 +38,8 @@
 				type="text" placeholder="Search...">
 		</div>
 		<div class="mypage-icon">
-			<a href="#"> <img src="${cpath}/resources/img/my.png" alt="">
+			<a href="javascript:void(0);"> <img
+				src="${cpath}/resources/img/my.png" alt="">
 			</a>
 		</div>
 		<div class="mypage">
@@ -59,18 +60,29 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+
 	</div>
 	<script>
-		document.querySelector(".mypage-icon").addEventListener("click",
-				function() {
-					const mypage = document.querySelector(".mypage");
+	document.querySelector(".mypage-icon a").addEventListener("click", function(event) {
+		event.preventDefault(); // 기본 동작 방지
+		const mypage = document.querySelector(".mypage");
 
-					if (mypage.style.display === "flex") {
-						mypage.style.display = "none";
-					} else {
-						mypage.style.display = "flex";
-					}
-				});
+		if (mypage.classList.contains("show")) {
+			// 요소가 보여지고 있을 때
+			mypage.classList.remove("show");
+			// display를 없애기 위해 일정 시간이 지난 후 'none'으로 변경
+			setTimeout(() => {
+				mypage.style.display = "none";
+			}, 10); // 트랜지션 시간과 동일하게 설정
+		} else {
+			// 요소가 숨겨져 있을 때
+			mypage.style.display = "flex"; // display를 먼저 설정
+			// 브라우저가 display 설정을 인식할 수 있도록 약간의 지연 시간 설정
+			setTimeout(() => {
+				mypage.classList.add("show");
+			}, 10);
+		}
+	});
 	</script>
 </body>
 </html>

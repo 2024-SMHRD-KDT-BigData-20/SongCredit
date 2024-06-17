@@ -48,7 +48,7 @@
 							<th colspan="5">하한가</th>
 						</tr>
 						<tr>
-							<td colspan="1">제목</td>
+							<td>제목</td>
 							<td>가수</td>
 							<td>상한가</td>
 							<td>하양가</td>
@@ -68,7 +68,6 @@
 							<th colspan="2">뉴스목록</th>
 						</tr>
 						<tr>
-							<!-- <td>썸네일</td> -->
 							<td>제목</td>
 							<td>날짜</td>
 						</tr>

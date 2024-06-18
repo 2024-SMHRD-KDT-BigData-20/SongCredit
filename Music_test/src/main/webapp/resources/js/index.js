@@ -204,7 +204,7 @@ function removemember() {
     let removeModal = document.querySelector(".removeModal");
     let modalBackground = document.querySelector(".modal-background");
     	removebutton.addEventListener("click", function () {
-    		removeModal.style.display = "block";
+    		removeModal.style.display = "flex";
     		modalBackground.style.display = "block";
     	});
     	
@@ -220,3 +220,106 @@ function removemember() {
     }
 
 window.onload = removemember;
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	// 아이디 불러오기
+	let id = document.getElementById('id');
+
+	// 아이디 error 메시지 불러오기
+	let id_e = document.getElementById('id_error');
+
+	// 비밀번호 불러오기
+	let p1 = document.getElementById('password');
+
+	// 비밀번호 재 확인 불러오기
+	let p2 = document.getElementById('password_confirm');
+	
+	let nick = document.getElementById('nick');
+	
+	let nick_e = document.getElementById('nick_error');
+
+	// 비밀번호 error 메시지 불러오기
+	let p_e = document.getElementById('pw_error');
+
+	// 비밀번호 재 확인 error 메시지 불러오기
+	let r_p_e = document.getElementById('re_pw_error');
+
+	// 생년월일 불러오기
+	let date = document.getElementById('birth');
+
+	// 생년월일 error 메시지 불러오기
+	let date_e = document.getElementById('birth_error');
+
+
+
+
+	function i(str) {
+		return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
+	}
+	
+	id.addEventListener('keyup', function() {
+		if (i(id.value)) {
+			id_e.style.display = 'none';
+		} else {
+			id_e.style.display = 'block';
+		}
+
+	});
+	function idCheck() {
+		let url = "idcheck.jsp?id=" + document.frm.id.value;
+		window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+	}
+
+
+	function pw(str) {
+		return str.length >= 8;
+	}
+
+	function repw(pw1, pw2) {
+		return pw1 === pw2;
+	}
+	
+	function nicke(str) {
+    return /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]*$/.test(str);
+	}
+	
+	nick.addEventListener('keyup', function() {
+		if (nicke(nick.value)) {
+			nick_e.style.display = 'none';
+		} else {
+			nick_e.style.display = 'block';
+		}
+
+	});
+	
+
+	p1.addEventListener('keyup', function() {
+		if (pw(p1.value)) {
+			p_e.style.display = 'none';
+		} else {
+			p_e.style.display = 'block';
+		}
+	});
+
+	p2.addEventListener('keyup', function() {
+		if (repw(p1.value, p2.value)) {
+			r_p_e.style.display = 'none';
+		} else {
+			r_p_e.style.display = 'block';
+		}
+	});
+	function dat(str) {
+		return /^\d{8}$/.test(str);
+	}
+
+	date.addEventListener('keyup', function() {
+		if (dat(date.value)) {
+			date_e.style.display = 'none';
+		} else {
+			date_e.style.display = 'block';
+		}
+	});
+
+});

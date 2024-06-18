@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chart Detail</title>
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -24,7 +23,7 @@
 				<div class="price chartFn" onclick="updateChart('가격')">가격</div>
 				<div class="wordcount chartFn" onclick="updateChart('Word Count')">Word
 					Count</div>
-				<div class="emotion chartFn" onclick="updateCharts('감정분석')">감정분석</div>
+				<div class="emotion chartFn"><a href="">감정분석</a></div>
 			</div>
 			<div class="myChart">
 				<canvas id="myChart"></canvas>

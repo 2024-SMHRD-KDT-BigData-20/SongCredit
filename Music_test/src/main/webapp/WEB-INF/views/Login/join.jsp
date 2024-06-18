@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사용자 관리</title>
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -16,7 +15,7 @@
 	<!-- 회원가입 컨테이너 -->
 	<div class="joincontainer">
 		<div class="text-box">
-			<div>Sign Up</div>
+			<div>Join</div>
 		</div>
 		<form id="joinForm">
 			<div class="Text-Field">
@@ -25,6 +24,7 @@
 					<input type="text" placeholder="아이디를 입력해주세요" class="id" id="id"
 						name="user_id">
 				</div>
+				<div class="errorbox"></div>
 			</div>
 			<div class="Text-Field">
 				<label for="nick">닉네임</label>
@@ -32,6 +32,7 @@
 					<input type="text" placeholder="닉네임을 입력해주세요" class="nick" id="nick"
 						name="user_nick">
 				</div>
+				<div class="errorbox" id="nick_error">특수문자를 제외해 입력해주세요</div>
 			</div>
 			<div class="Text-Field">
 				<label for="password">비밀번호</label>
@@ -40,6 +41,7 @@
 						name="user_pw"> <span
 						class="password-toggle-icon far fa-eye"></span>
 				</div>
+				<div class="errorbox" id="pw_error">한글을 제외한 8자 이상 작성해주세요</div>
 			</div>
 			<div class="Text-Field">
 				<label for="password_confirm">비밀번호 확인</label>
@@ -48,6 +50,7 @@
 						id="password_confirm" class="password"> <span
 						class="password-toggle-icon far fa-eye"></span>
 				</div>
+				<div class="errorbox" id="re_pw_error">비밀번호가 맞지 않습니다</div>
 			</div>
 			<div class="Text-Field email">
 				<label for="email">E-mail</label>
@@ -74,6 +77,7 @@
 					<input type="text" placeholder="ex)20000803" class="birth"
 						id="birth" name="user_birth">
 				</div>
+				<div class="errorbox" id="birth_error">양식에 맞게 입력하세요 ex)20000101</div>
 			</div>
 			<div class="Text-Field">
 				<label for="user_gender">성별</label>

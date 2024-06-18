@@ -8,11 +8,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SongCredic</title>
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<jsp:include page="include/header.jsp" />
+	<%@ include file="./include/header.jsp" %>
 	<div class="main">
 		<!-- 메인 컨테이너 -->
 		<div class="maincontainer" id="maincontainer">
@@ -25,7 +24,7 @@
 				</div>
 			</div>
 			<div class="sep"></div>
-			<h3>Top 뮤직카우 리스트</h3>
+			<h3>Top 뮤직카우 리스트(가격순)</h3>
 			<div class="TopmusicCow">
 				<table>
 					<thead>
@@ -36,7 +35,7 @@
 							<td>제목</td>
 							<td>가수</td>
 							<td>상한가</td>
-							<td>하양가</td>
+							<td>하한가</td>
 							<td>전일비</td>
 						</tr>
 					</thead>
@@ -51,7 +50,7 @@
 							<td>제목</td>
 							<td>가수</td>
 							<td>상한가</td>
-							<td>하양가</td>
+							<td>하한가</td>
 							<td>전일비</td>
 						</tr>
 					</thead>
@@ -128,23 +127,28 @@
 		}
 
 		function updateChartList(chartData) {
-		    const container = $('#gridContainer');
-		    let bList = '';
+			const container = $('#gridContainer');
+			let bList = '';
 
-		    $.each(chartData, function(index, item) {
-		        bList += "<div class='cList'>";
-		        bList += "<a href='" + "${cpath}/chartDetail?music_idx=" + item.music_idx + "'>";
-		        bList += "<img src='" + item.album_img + "' width='100px' height='100px'>";
-		        bList += "<h4>" + item.music_title + "</h4>";
-		        bList += "<h5>" + item.artist + "</h5>";
-		        bList += "<h5>" + item.music_genre + "</h5>";
-		        bList += "<p>판매량: " + item.upper_limit + "</p>";
-		        bList += "<p>현재가: " + item.under_limit + "</p>";
-		        bList += "</a>";
-		        bList += "</div>";
-		    });
-		    container.html(bList);
-		    updateSlider();
+			$
+					.each(
+							chartData,
+							function(index, item) {
+								bList += "<div class='cList'>";
+								bList += "<a href='"
+										+ "${cpath}/chartDetail?music_idx="
+										+ item.music_idx + "'>";
+								bList += "<img src='" + item.album_img + "' width='100px' height='100px'>";
+								bList += "<h4>" + item.music_title + "</h4>";
+								bList += "<h5>" + item.artist + "</h5>";
+								bList += "<h5>" + item.music_genre + "</h5>";
+								bList += "<p>판매량: " + item.upper_limit + "</p>";
+								bList += "<p>현재가: " + item.under_limit + "</p>";
+								bList += "</a>";
+								bList += "</div>";
+							});
+			container.html(bList);
+			updateSlider();
 		}
 
 		function updatenewsList(newsData) {

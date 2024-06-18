@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사용자 관리</title>
-<link rel="stylesheet" href="${cpath}/resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -17,7 +16,7 @@
 	<div class="main">
 		<div class="signcontainer">
 			<div class="text-box">
-				<div>Sign In</div>
+				<div>Login</div>
 			</div>
 			<div class="maincontainer">
 				<form>
@@ -27,6 +26,7 @@
 							<input type="text" placeholder="아이디를 입력해주세요" class="id" id="id"
 								name="user_id">
 						</div>
+						<div class="errorbox"></div>
 					</div>
 					<div class="Text-Field">
 						<label for="password">비밀번호</label>
@@ -35,6 +35,7 @@
 								class="password" id="password" name="user_pw"> <span
 								class="password-toggle-icon far fa-eye"></span>
 						</div>
+						<div class="errorbox"></div>
 					</div>
 					<div class="member_footer">
 						<div class="find">
@@ -48,6 +49,7 @@
 					<div class="button">
 						<input type="button" class="loginFunction" value="Sign In"></input>
 					</div>
+					
 				</form>
 			</div>
 		</div>

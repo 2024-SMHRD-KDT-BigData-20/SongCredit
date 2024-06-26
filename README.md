@@ -23,6 +23,10 @@
 데이터 분석 및 머신러닝: TensorFlow, Keras, Pandas, NumPy
 기타 도구: Git, Jupyter Notebook, Pycham, myBatis, 전자정부프레임워크
 
+![Python](https://img.shields.io/badge/python-3.8-blue)
+![TensorFlow](https://img.shields.io/badge/tensorflow-2.4-orange)
+![Keras](https://img.shields.io/badge/keras-2.4-red)
+
 ## 시스템 아키텍처
 
 

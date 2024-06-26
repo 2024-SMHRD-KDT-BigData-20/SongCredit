@@ -92,9 +92,18 @@ END;
 문제: 일부 페이지에 중복되는 요소 ID 및 CLASS명이 존재하여 잘못된 요소가 선택됨
 
 해결: CSS_SELECTOR 대신 XPATH를 사용하여 정확한 요소를 선택하여 크롤링 진행
-```
+## 크롤링 코드 예시
+
+```python
+# 필요한 라이브러리 임포트
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+from tqdm import tqdm as tq
+
 # 크롤링 코드 예시
-for i in tq(range(int(len(songs_with_artists)/5), int(len(songs_with_artists)/5*2))):
+for i in tq(range(int(len(songs_with_artists) / 5), int(len(songs_with_artists) / 5 * 2))):
     search = driver.find_element(By.ID, 'keyword')
     search.send_keys(songs_with_artists[i])
     search.send_keys(Keys.ENTER)
@@ -102,7 +111,7 @@ for i in tq(range(int(len(songs_with_artists)/5), int(len(songs_with_artists)/5*
     cycle = driver.find_elements(By.CSS_SELECTOR, 'strong.title')
 
     if len(cycle) > 2:
-        for j in range(1, len(cycle)-1):
+        for j in range(1, len(cycle) - 1):
             time.sleep(5)
             click_title = driver.find_element(By.XPATH, f'//*[@id="market_list"]/div[2]/a[{j}]/div[2]/strong')
             click_title.click()

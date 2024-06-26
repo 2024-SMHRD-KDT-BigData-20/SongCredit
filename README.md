@@ -17,15 +17,33 @@
 데이터 시각화: 음원 동향 및 감정 분석 결과를 시각화하여 사용자에게 제공.
 
 ## 기술스택
-프론트엔드: React.js, HTML, CSS, JavaScript
-백엔드: Python, Flask, Java
-데이터베이스: MySQL, Oracle
-데이터 분석 및 머신러닝: TensorFlow, Keras, Pandas, NumPy
-기타 도구: Git, Jupyter Notebook, Pycham, myBatis, 전자정부프레임워크
+### 프론트엔드
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-![Python](https://img.shields.io/badge/python-3.8-blue)
-![TensorFlow](https://img.shields.io/badge/tensorflow-2.4-orange)
-![Keras](https://img.shields.io/badge/keras-2.4-red)
+### 백엔드
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
+![Java](https://img.shields.io/badge/Java-007396?logo=java&logoColor=white)
+
+### 데이터베이스
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
+![Oracle](https://img.shields.io/badge/Oracle-F80000?logo=oracle&logoColor=white)
+
+### 데이터 분석 및 머신러닝
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white)
+![Keras](https://img.shields.io/badge/Keras-D00000?logo=keras&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white)
+
+### 기타 도구
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+![Jupyter Notebook](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)
+![PyCharm](https://img.shields.io/badge/PyCharm-000000?logo=pycharm&logoColor=white)
+![myBatis](https://img.shields.io/badge/myBatis-E63228?logo=mybatis&logoColor=white)
+![전자정부프레임워크](https://img.shields.io/badge/전자정부프레임워크-0054A6?logoColor=white)
 
 ## 시스템 아키텍처
 

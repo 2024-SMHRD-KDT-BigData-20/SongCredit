@@ -50,7 +50,8 @@
 
 
 ## 서비스 흐름도 및 SW유스케이스
-![image](https://github.com/2024-SMHRD-KDT-BigData-20/SongCredit/assets/160554303/607973ab-af5a-4c31-97d3-4e593df3a166)
+![image](https://github.com/2024-SMHRD-KDT-BigData-20/SongCredit/assets/160554303/94fafee8-6a98-4869-b604-f78513729080)
+
 ![image](https://github.com/2024-SMHRD-KDT-BigData-20/SongCredit/assets/160554303/82b684a3-2fb1-46ac-a6ac-d9beed4214a1)
 
 

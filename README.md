@@ -66,14 +66,18 @@
 문제: MySQL은 재귀 함수 및 트리거를 지원하지 않아 한 테이블을 자동으로 업데이트 시키지 못함.
 
 해결: BACKUP 테이블을 생성하여 기존 테이블의 데이터를 하루 간격으로 백업 테이블로 옮기고 삭제. 트리거가 적용된 테이블의 변화가 생기면 데이터가 백업 테이블에 적재됨.
-```
-CREATE DEFINER=`sc_21K_bigdata11_p3_2`@`%` TRIGGER `backup_news_info` 
-AFTER INSERT ON `news_info` 
-FOR EACH ROW 
+## SQL 트리거: `backup_news_info`
+
+이 트리거는 `news_info` 테이블에 새 레코드가 삽입될 때마다 실행됩니다. 새 레코드의 `news_title`이 `news_backup` 테이블에 존재하지 않는 경우, 해당 레코드를 `news_backup` 테이블에 삽입합니다.
+
+```sql
+CREATE DEFINER=`sc_21K_bigdata11_p3_2`@`%` TRIGGER `backup_news_info`
+AFTER INSERT ON `news_info`
+FOR EACH ROW
 BEGIN
   -- 트리거 시 실행되는 코드
   IF NOT EXISTS (
-      SELECT 1 
+      SELECT 1
       FROM news_backup WHERE news_title = NEW.news_title
   ) THEN
     INSERT INTO

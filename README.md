@@ -92,7 +92,8 @@ END;
 문제: 일부 페이지에 중복되는 요소 ID 및 CLASS명이 존재하여 잘못된 요소가 선택됨
 
 해결: CSS_SELECTOR 대신 XPATH를 사용하여 정확한 요소를 선택하여 크롤링 진행
-## 크롤링 코드 예시
+
+이 코드는 웹 드라이버를 사용하여 특정 범위의 노래와 아티스트를 검색하고, 결과를 클릭하여 세부 정보를 수집하는 크롤링 작업을 수행합니다.
 
 ```python
 # 필요한 라이브러리 임포트
@@ -124,11 +125,24 @@ for i in tq(range(int(len(songs_with_artists) / 5), int(len(songs_with_artists) 
         driver.back()
 ```
 
+
 ### 3. GRU 모델 테스트 시 메모리 부족 현상
 문제: 모델 테스트를 진행 중 메모리 부족으로 인해 브라우저가 다운되거나 Colab의 연결이 끊김
 
 해결: Batch Size를 기존 64에서 1000으로 변경하여 과도한 메모리 사용을 방지하고 테스트 시간을 단축
-```
+
+이 코드는 토크나이저와 모델을 로드하고, 텍스트 전처리 및 예측을 수행하여 결과를 데이터프레임에 저장하는 과정을 다룹니다.
+
+```python
+# 필요한 라이브러리 임포트
+import pickle
+import re
+import pandas as pd
+from keras.models import load_model
+from keras.preprocessing.sequence import pad_sequences
+from tqdm import tqdm
+from konlpy.tag import Okt
+
 # 토크나이저 및 모델 로드
 with open('/content/drive/MyDrive/2024_딥러닝/최종프로젝트/현식_모델링/token/tokenizer_GRU(6_10).pickle', 'rb') as handle:
     loaded_tokenizer = pickle.load(handle)
@@ -138,6 +152,10 @@ max_len = 221
 model_path = '/content/drive/MyDrive/2024_딥러닝/최종프로젝트/현식_모델링/model/best_model_GRU(6_10).h5'
 model = load_model(model_path)
 
+# 텍스트 전처리 함수
+okt = Okt()
+stopwords = ['의', '가', '이', '은', '들', '는', '좀', '잘', '걍', '과', '도', '를', '으로', '자', '에', '와', '한', '하다']
+
 def preprocess_text(sentence):
     if not isinstance(sentence, str):
         return ''
@@ -146,6 +164,7 @@ def preprocess_text(sentence):
     morphs = okt.morphs(text)
     return ' '.join(word for word in morphs if word not in stopwords)
 
+# 예측 함수
 def predict_function(sentence):
     preprocessed_text = preprocess_text(sentence)
     if not preprocessed_text:
@@ -167,7 +186,7 @@ df = test_data.copy()
 # 일괄 처리
 batch_size = 1000  # 한 번에 처리할 데이터 수
 
-for start in tqdm(range(0, len(sample))):
+for start in tqdm(range(0, len(test_data_reivew), batch_size)):
     end = start + batch_size
     batch_reviews = test_data_reivew[start:end]
     batch_results = [predict_function(review) for review in batch_reviews]
@@ -179,11 +198,15 @@ for start in tqdm(range(0, len(sample))):
 
 해결: 입력값 검증 코드를 추가하고 불필요한 재학습 코드를 제거
 
-```
+이 코드는 텍스트 전처리 및 예측을 수행하는 함수를 정의합니다.
+
+```python
 import re
+from konlpy.tag import Mecab
+from keras.preprocessing.sequence import pad_sequences
 
 # 불용어 목록
-stopwords = ['의','가','이','은','들','는','좀','잘','걍','과', '도','를','으로','자','에','와','한','멜론','지니','벅스']
+stopwords = ['의', '가', '이', '은', '들', '는', '좀', '잘', '걍', '과', '도', '를', '으로', '자', '에', '와', '한', '멜론', '지니', '벅스']
 
 # Mecab 객체 생성
 mecab = Mecab()
@@ -194,7 +217,7 @@ def predict_function(sentence):
         return None
     
     # 특수 문자 제거
-    predict_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힇 ]','', sentence)
+    predict_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힇 ]', '', sentence)
     
     # 형태소 분석 및 불용어 제거
     morphs = mecab.morphs(predict_sentence)

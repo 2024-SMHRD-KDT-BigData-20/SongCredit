@@ -39,7 +39,28 @@
 추천 화면: 맞춤형 음악저작권 투자 상품 추천
 
 ## 트러블슈팅
-### 1. 데이터 크롤링 중 중복 요소 선택 문제
+### 1. MySQL 트리거 이슈: 자동 업데이트 문제
+문제: MySQL은 재귀 함수 및 트리거를 지원하지 않아 한 테이블을 자동으로 업데이트 시키지 못함.
+해결: BACKUP 테이블을 생성하여 기존 테이블의 데이터를 하루 간격으로 백업 테이블로 옮기고 삭제. 트리거가 적용된 테이블의 변화가 생기면 데이터가 백업 테이블에 적재됨.
+```
+CREATE DEFINER=`sc_21K_bigdata11_p3_2`@`%` TRIGGER `backup_news_info` 
+AFTER INSERT ON `news_info` 
+FOR EACH ROW 
+BEGIN
+  -- 트리거 시 실행되는 코드
+  IF NOT EXISTS (
+      SELECT 1 
+      FROM news_backup WHERE news_title = NEW.news_title
+  ) THEN
+    INSERT INTO
+    news_backup (news_title, news_content, news_thumb, news_maker, pressed_at)
+    VALUES
+    (NEW.news_title, NEW.news_content, NEW.news_thumb, NEW.news_maker, NEW.pressed_at);
+  END IF;
+END;
+```
+
+### 2. 데이터 크롤링 중 중복 요소 선택 문제
 원인: 일부 페이지에 중복되는 요소 ID 및 CLASS명이 존재하여 잘못된 요소가 선택됨
 해결: CSS_SELECTOR 대신 XPATH를 사용하여 정확한 요소를 선택하여 크롤링 진행
 ```
@@ -65,7 +86,7 @@ for i in tq(range(int(len(songs_with_artists)/5), int(len(songs_with_artists)/5*
         driver.back()
 ```
 
-### 2. GRU 모델 테스트 시 메모리 부족 현상
+### 3. GRU 모델 테스트 시 메모리 부족 현상
 원인: 모델 테스트를 진행 중 메모리 부족으로 인해 브라우저가 다운되거나 Colab의 연결이 끊김
 해결: Batch Size를 기존 64에서 1000으로 변경하여 과도한 메모리 사용을 방지하고 테스트 시간을 단축
 ```
@@ -114,7 +135,7 @@ for start in tqdm(range(0, len(sample))):
     df.loc[start:end-1, '긍/부정'] = batch_results
 ```
 
-### 3. LSTM 모델 입력값 검증 및 메모리 사용 최적화
+### 4. LSTM 모델 입력값 검증 및 메모리 사용 최적화
 원인: 입력값이 문자열이 아니어도 테스트에 포함되는 경우가 발생하고, 소요 시간이 오래 걸리며 과도한 메모리 점유가 발생
 해결: 입력값 검증 코드를 추가하고 불필요한 재학습 코드를 제거
 

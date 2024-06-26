@@ -1,6 +1,7 @@
 # SongCredit(팀명 : 식스)
 ## 서비스 개요
 * 서비스명 : 딥러닝을 활용한 음원 동향 분석 서비스
+  
 ## <서비스 설명>
 * 다양한 증권상품이 발매하고 예금과 적금보다는 투자가 유행이고 필수인 요즘 세대에 STO중 하나인 음악저작권의 투자를 유도하는 음원 댓글 감정분석 기반 추천 서비스
 <br>
@@ -38,11 +39,33 @@
 추천 화면: 맞춤형 음악저작권 투자 상품 추천
 
 ## 트러블슈팅
-문제 1: 데이터 크롤링 중 중복 요소 선택 문제
+#데이터 크롤링 중 중복 요소 선택 문제
 원인: 일부 페이지에 중복되는 요소 ID 및 CLASS명이 존재하여 잘못된 요소가 선택됨
 해결: CSS_SELECTOR 대신 XPATH를 사용하여 정확한 요소를 선택하여 크롤링 진행
+```
+# 크롤링 코드 예시
+for i in tq(range(int(len(songs_with_artists)/5), int(len(songs_with_artists)/5*2))):
+    search = driver.find_element(By.ID, 'keyword')
+    search.send_keys(songs_with_artists[i])
+    search.send_keys(Keys.ENTER)
 
-문제 2: GRU 모델 테스트 시 메모리 부족 현상
+    cycle = driver.find_elements(By.CSS_SELECTOR, 'strong.title')
+
+    if len(cycle) > 2:
+        for j in range(1, len(cycle)-1):
+            time.sleep(5)
+            click_title = driver.find_element(By.XPATH, f'//*[@id="market_list"]/div[2]/a[{j}]/div[2]/strong')
+            click_title.click()
+            canvas()
+            driver.back()
+    else:
+        click_title = driver.find_element(By.XPATH, f'//*[@id="market_list"]/div[2]/a[1]/div[2]/strong')
+        click_title.click()
+        canvas()
+        driver.back()
+```
+
+#GRU 모델 테스트 시 메모리 부족 현상
 원인: 모델 테스트를 진행 중 메모리 부족으로 인해 브라우저가 다운되거나 Colab의 연결이 끊김
 해결: Batch Size를 기존 64에서 1000으로 변경하여 과도한 메모리 사용을 방지하고 테스트 시간을 단축
 ```
@@ -90,6 +113,45 @@ for start in tqdm(range(0, len(sample))):
     batch_results = [predict_function(review) for review in batch_reviews]
     df.loc[start:end-1, '긍/부정'] = batch_results
 ```
+
+#LSTM 모델 입력값 검증 및 메모리 사용 최적화
+원인: 입력값이 문자열이 아니어도 테스트에 포함되는 경우가 발생하고, 소요 시간이 오래 걸리며 과도한 메모리 점유가 발생
+해결: 입력값 검증 코드를 추가하고 불필요한 재학습 코드를 제거
+
+```
+import re
+
+# 불용어 목록
+stopwords = ['의','가','이','은','들','는','좀','잘','걍','과', '도','를','으로','자','에','와','한','멜론','지니','벅스']
+
+# Mecab 객체 생성
+mecab = Mecab()
+
+# 예측 함수
+def predict_function(sentence):
+    if not isinstance(sentence, str):
+        return None
+    
+    # 특수 문자 제거
+    predict_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힇 ]','', sentence)
+    
+    # 형태소 분석 및 불용어 제거
+    morphs = mecab.morphs(predict_sentence)
+    filtered_sentence = ' '.join(word for word in morphs if word not in stopwords)
+    
+    # 인코딩
+    encode = tokenizer.texts_to_sequences([filtered_sentence])
+    
+    # 패딩 80
+    pad_new = pad_sequences(encode, maxlen=80)
+    
+    # 예측
+    score = LSTM_model.predict(pad_new)
+    
+    # 기준점: 0.5
+    return score > 0.5
+```
+
 ## 팀원 역할 및 느낀점
 
 

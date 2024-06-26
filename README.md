@@ -46,12 +46,15 @@
 ![전자정부프레임워크](https://img.shields.io/badge/전자정부프레임워크-0054A6?logoColor=white)
 
 ## 시스템 아키텍처
+![image](https://github.com/2024-SMHRD-KDT-BigData-20/SongCredit/assets/160554303/ee225e80-bb68-4941-87a2-ddc80a27f72e)
 
 
 ## 서비스 흐름도 및 SW유스케이스
+![image](https://github.com/2024-SMHRD-KDT-BigData-20/SongCredit/assets/160554303/607973ab-af5a-4c31-97d3-4e593df3a166)
 
 
-## ER다이어그램
+## 테이블
+![image](https://github.com/2024-SMHRD-KDT-BigData-20/SongCredit/assets/160554303/2c65d88a-1f80-46ed-b2aa-3e11bfabfcef)
 
 
 ## 화면구성
